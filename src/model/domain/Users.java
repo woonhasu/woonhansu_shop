@@ -48,4 +48,6 @@ public class Users {
 		return "Users [id=" + id + ", pw=" + pw + ", admin=" + admin + ", name=" + name + ", address=" + address
 				+ ", phone=" + phone + "]";
 	}
+	
+	
 }
