@@ -24,7 +24,7 @@ public class ProductDAO {
 	/** 제품 다중(전체) 조회 >> 지수
 	 * 
 	 */
-	public ArrayList<ProductDTO.Get> getAllProducts() {
+	public ArrayList<ProductDTO.Get> getProductAll() {
 		EntityManager em =  DBUtil.getEntityManager();
 		ArrayList<ProductDTO.Get> all = null;
 		
@@ -43,7 +43,7 @@ public class ProductDAO {
 	/** 제품 이름으로 다중 조회 >> 지수
 	 * 
 	 */
-	public ArrayList<ProductDTO.Get> getProduct(String name) {
+	public ArrayList<ProductDTO.Get> getProductByName(String name) {
 		EntityManager em = DBUtil.getEntityManager();
 		ArrayList<ProductDTO.Get> nAll = null;
 		
@@ -64,7 +64,7 @@ public class ProductDAO {
 	/** 제품 카테고리별로 조회 >> 지수
 	 * 
 	 */
-	public ArrayList<ProductDTO.Get> getCategoryProduct(String category) {
+	public ArrayList<ProductDTO.Get> getProductByCategory(String category) {
 		EntityManager em = DBUtil.getEntityManager();
 		ArrayList<ProductDTO.Get> cAll = null;
 		

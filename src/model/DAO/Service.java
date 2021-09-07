@@ -55,8 +55,8 @@ public class Service {
 	/** 제품 다중(전체) 조회 >> 지수
 	 * 
 	 */
-	public static ArrayList<ProductDTO.Get> getAllProducts() throws NotExistException {
-		ArrayList<ProductDTO.Get> all = productDAO.getAllProducts();
+	public static ArrayList<ProductDTO.Get> getProductAll() throws NotExistException {
+		ArrayList<ProductDTO.Get> all = productDAO.getProductAll();
 		if(all == null) {
 			throw new NotExistException("제품 정보를 찾을 수 없습니다.");
 		}
@@ -70,8 +70,8 @@ public class Service {
 	/** 제품 이름으로 다중 조회 >> 지수
 	 * 
 	 */
-	public static ArrayList<ProductDTO.Get> getProduct(String name) throws NotExistException {
-		ArrayList<ProductDTO.Get> nAll = productDAO.getProduct(name);
+	public static ArrayList<ProductDTO.Get> getProductByName(String name) throws NotExistException {
+		ArrayList<ProductDTO.Get> nAll = productDAO.getProductByName(name);
 		if(nAll == null) {
 			throw new NotExistException("해당 이름 제품 정보를 찾을 수 없습니다.");
 		}
@@ -85,8 +85,8 @@ public class Service {
 	/** 제품 카테고리별로 조회 >> 지수
 	 * 
 	 */
-	public static ArrayList<ProductDTO.Get> getCategoryProduct(String category) throws NotExistException {
-		ArrayList<ProductDTO.Get> cAll = productDAO.getCategoryProduct(category);
+	public static ArrayList<ProductDTO.Get> getProductByCategory(String category) throws NotExistException {
+		ArrayList<ProductDTO.Get> cAll = productDAO.getProductByCategory(category);
 		if(cAll == null) {
 			throw new NotExistException("해당 카테고리 제품 정보를 찾을 수 없습니다.");
 		}

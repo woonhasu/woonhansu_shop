@@ -58,7 +58,7 @@ public class Controller_Jisu extends HttpServlet {
 	/** 회원 정보 수정 요청  >> 지수
 	 * 
 	 */
-	public void userUpdateReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void updateUserReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
 		try {
@@ -74,7 +74,7 @@ public class Controller_Jisu extends HttpServlet {
 	/** 회원 정보 수정 - 상세 정보 확인  >> 지수
 	 * 
 	 */
-	public void userUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
 		String pw = request.getParameter("pw");
@@ -101,11 +101,11 @@ public class Controller_Jisu extends HttpServlet {
 	/** 제품 다중(전체) 조회 >> 지수
 	 * 
 	 */
-	public void productAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getProductAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
 		try {
-			request.setAttribute("productAll", service.getAllProducts());
+			request.setAttribute("productAll", service.getProductAll());
 			url = "productAllList.jsp";
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
@@ -117,11 +117,11 @@ public class Controller_Jisu extends HttpServlet {
 	/** 제품 이름으로 단일 조회 >> 지수
 	 * 
 	 */
-	public void productName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getProductByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
 		try {
-			request.setAttribute("product", service.getProduct(request.getParameter("productName")));
+			request.setAttribute("product", service.getProductByName(request.getParameter("productName")));
 			url = "product/productDetail.jsp";
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
@@ -133,11 +133,11 @@ public class Controller_Jisu extends HttpServlet {
 	/** 제품 카테고리별로 조회 >> 지수
 	 * 
 	 */
-	public void productCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getProductByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
 		try {
-			request.setAttribute("productCategory", service.getCategoryProduct(request.getParameter("category")));
+			request.setAttribute("productCategory", service.getProductByCategory(request.getParameter("category")));
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			//e.printStackTrace();
