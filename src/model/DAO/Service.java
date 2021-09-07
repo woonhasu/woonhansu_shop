@@ -236,6 +236,20 @@ public class Service {
 				System.out.println(v.getProduct());
 			});
 		}
+		
+		// idx 로 product 가져오기
+		public ProductDTO.Get getProductByIdx(Long idx) {
+			return productDAO.getProductByIdx(idx);
+		}
+
+		public UsersDTO.LogIn login(String id, String pw) throws NotExistException {
+			UsersDTO.LogIn user = usersDAO.login(id, pw);
+			if(user == null) {
+				throw new NotExistException("해당 카테고리 제품 정보를 찾을 수 없습니다.");
+			} else {
+				return user;
+			}
+		}
 	
 	
 	
