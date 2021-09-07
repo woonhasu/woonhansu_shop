@@ -11,8 +11,8 @@ public class ProductDTO {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class Create {
-		private String name;
 		private String category;
+		private String name;
 		private Integer price;
 		private String color;
 		private String psize;
@@ -33,5 +33,10 @@ public class ProductDTO {
 	public static class Delete {
 		private Long idx;
     }
+	
+	@Data
+	public static class Get extends Create {
+		private Long idx;
+	}
 
 }

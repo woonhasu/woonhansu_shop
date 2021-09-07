@@ -1,0 +1,90 @@
+package model.DAO;
+
+import java.util.ArrayList;
+
+import exception.NotExistException;
+import model.DTO.ProductDTO;
+import model.DTO.UsersDTO;
+
+public class Service {
+	
+	private static Service instance = new Service();
+	
+	private Service() {}
+	
+	public static Service getInstance() {
+		return instance;
+	}
+	
+	private static UsersDAO usersDAO = UsersDAO.getInstance();
+	private static ProductDAO productDAO = ProductDAO.getInstance();
+	
+	
+	/** 회원가입 >> 지수
+	 * 
+	 */
+	public static boolean addUser(UsersDTO.Create user) {
+		return usersDAO.addUser(user);
+	}
+	
+	
+	/** 회원 정보 수정 ** request, update 나눠서  >> 지수
+	 * 
+	 */
+	
+	/** 제품 다중(전체) 조회 >> 지수
+	 * 
+	 */
+	public static ArrayList<ProductDTO.Get> getAllProducts() throws NotExistException {
+		ArrayList<ProductDTO.Get> all = productDAO.getAllProducts();
+		if(all == null) {
+			throw new NotExistException("제품 정보를 찾을 수 없습니다.");
+		}
+		if(all.size() == 0) {
+			throw new NotExistException("제품 정보가 존재하지 않습니다.");
+		}
+		
+		return all;
+	}
+	
+	/** 제품 이름으로 단일 조회 >> 지수
+	 * 
+	 */
+	public static ArrayList<ProductDTO.Get> getProduct(String name) throws NotExistException {
+		ArrayList<ProductDTO.Get> nAll = productDAO.getProduct(name);
+		if(nAll == null) {
+			throw new NotExistException("해당 이름 제품 정보를 찾을 수 없습니다.");
+		}
+		if(nAll.size() == 0) {
+			throw new NotExistException("해당 이름 제품 정보가 존재하지 않습니다.");
+		}
+		
+		return nAll;
+	}
+	
+	/** 제품 카테고리별로 조회 >> 지수
+	 * 
+	 */
+	public static ArrayList<ProductDTO.Get> getCategoryProduct(String category) throws NotExistException {
+		ArrayList<ProductDTO.Get> cAll = productDAO.getCategoryProduct(category);
+		if(cAll == null) {
+			throw new NotExistException("해당 카테고리 제품 정보를 찾을 수 없습니다.");
+		}
+		if(cAll.size() == 0) {
+			throw new NotExistException("해당 카테고리 제품 정보가 존재하지 않습니다.");
+		}
+		
+		return cAll;
+	}
+	
+	public static void main(String[] args) throws NotExistException {
+//		UsersDTO.Create user = new UsersDTO.Create("jisu20", "pw", 0, "배지수", "집", "010");
+//		System.out.println(addUser(user));
+		
+		System.out.println(getAllProducts());
+		
+		System.out.println(getProduct("조거팬츠"));
+		
+		System.out.println(getCategoryProduct("상의"));
+	}
+}
