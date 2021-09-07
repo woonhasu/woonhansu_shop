@@ -11,11 +11,11 @@ import model.DTO.OrdersDTO;
 import model.domain.Orders;
 import util.DBUtil;
 
-public class OrdersDAO2 {
+public class OrdersDAO {
 
-	private static OrdersDAO2 instance = new OrdersDAO2();
-	public OrdersDAO2() {}
-	public static OrdersDAO2 getInstance() {
+	private static OrdersDAO instance = new OrdersDAO();
+	public OrdersDAO() {}
+	public static OrdersDAO getInstance() {
 		return instance;
 	}
 

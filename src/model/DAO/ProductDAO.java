@@ -1,5 +1,6 @@
 package model.DAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
@@ -81,15 +82,47 @@ public class ProductDAO {
 		return cAll;
 	}
 	
-	/** 제품 추가 >> 한나
-	 * 
-	 */
+	/** 제품 추가 >> 한나 */
+	public static boolean addProduct(ProductDTO.Create Product) throws SQLException {
+		EntityManager em = DBUtil.getEntityManager();
+		em.getTransaction().begin();
+		boolean result = false;
+		try {
+			em.persist(Product.toEntity());
+			em.getTransaction().commit();
+			
+			result = true;
+		}catch(Exception e) {
+			em.getTransaction().rollback();
+		}finally {
+			em.close();
+			em = null;
+		}
+		return result;
+	}
+	
+	/** 제품 삭제 >> 한나 */
+	public static boolean deleteProduct(Long idx) throws SQLException {
+		EntityManager em = DBUtil.getEntityManager();
+		em.getTransaction().begin();
+		boolean result = false;
+		
+		try {
+			em.remove(em.find(Product.class, idx));
+			em.getTransaction().commit();
+			
+			result = true;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+			em = null;
+		}
+		return result;
+	}
 	
 	/** 제품 수정 ** request, update 나눠서(보류)
 	 * 
 	 */
-	
-	/** 제품 삭제 >> 한나
-	 * 
-	 */
+
 }
