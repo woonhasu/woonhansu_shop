@@ -43,13 +43,14 @@ public class UsersDAO {
 		return result;
 	}
 
-	public UsersDTO.LogIn login(String id, String pw) {
+	public UsersDTO.Get login(String userId, String pw) {
 		EntityManager em = DBUtil.getEntityManager();
-		UsersDTO.LogIn user = null;
 		Users check = null;
 		
+		UsersDTO.Get user = null;
+		
 		try {
-			check = em.find(Users.class, id);
+			check = em.find(Users.class, userId);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -57,10 +58,8 @@ public class UsersDAO {
 			em = null;
 		}
 		
-		if(check.getId().equals(id) && check.getPw().equals(pw)) {
-			user = new UsersDTO.LogIn();
-			user.setId(id);
-			user.setPw(pw);
+		if(check.getId().equals(userId) && check.getPw().equals(pw)) {
+			user = getUser(userId);
 		}
 		return user;
 	}

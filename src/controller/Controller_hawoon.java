@@ -27,9 +27,29 @@ public class Controller_hawoon extends HttpServlet {
 			logout(request, response);
 		} else if(command.equals("getProductAll")) {
 			getProductAll(request, response);
+		} else if(command.equals("getCartAll")) {
+			getCartAll(request, response);
+		} else if(command.equals("addOrder")) {
+			//아직 없다!!
 		}
 	}
 	
+	//	로그인
+//	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		String url = "showError.jsp";
+//		String id = request.getParameter("id");
+//		String pw = request.getParameter("pw");
+//		
+//		try {
+//			UsersDTO.LogIn user = service.login(id,pw);
+//			request.getSession().setAttribute("user", user);
+//			url = "shop.jsp";
+//		} catch (Exception s) {
+//			request.setAttribute("errorMsg", s.getMessage());
+//			s.printStackTrace();
+//		}
+//		request.getRequestDispatcher(url).forward(request, response);
+//	}
 	//	로그인
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
@@ -37,9 +57,9 @@ public class Controller_hawoon extends HttpServlet {
 		String pw = request.getParameter("pw");
 		
 		try {
-			UsersDTO.LogIn user = service.login(id,pw);
+			UsersDTO.Get user = service.login(id,pw);
 			request.getSession().setAttribute("user", user);
-			url = "shop.jsp";
+			url = "controller?command=getProductAll";
 		} catch (Exception s) {
 			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();
@@ -51,7 +71,7 @@ public class Controller_hawoon extends HttpServlet {
 	private void logout(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.getSession().removeAttribute("user");
-			response.sendRedirect("shop.jsp");
+			getProductAll(request, response);
 		} catch (Exception s) {
 			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();
@@ -61,7 +81,7 @@ public class Controller_hawoon extends HttpServlet {
 	private void getProductAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
-			ArrayList<ProductDTO.Get> all = service.getAllProducts();
+			ArrayList<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			url = "shop.jsp";
 		} catch (Exception s) {
@@ -73,8 +93,8 @@ public class Controller_hawoon extends HttpServlet {
 	public void getCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
-			request.setAttribute("getCartAll", service.getCartAll());
-			url = "cartList.jsp";
+			request.setAttribute("cartAll", service.getCartAll());
+			url = "cart.jsp";
 		} catch (Exception s) {
 			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();
@@ -91,7 +111,7 @@ public class Controller_hawoon extends HttpServlet {
 			Long idx = (long)Integer.parseInt(request.getParameter("idx"));
 			ProductDTO.Get product = service.getProductByIdx(idx);
 //			request.setAttribute("insertCart", service.insertCart(request.getSession().getAttribute("user"), product);
-			url = "cartList.jsp";
+			url = "cart.jsp";
 		} catch (Exception s) {
 			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();
@@ -106,7 +126,7 @@ public class Controller_hawoon extends HttpServlet {
 		String url = "showError.jsp";
 		try {
 //			request.setAttribute("deleteCart", service.deleteCart(request.getParameter("user")));
-			url = "cartList.jsp";
+			url = "cart.jsp";
 		} catch (Exception s) {
 			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();
