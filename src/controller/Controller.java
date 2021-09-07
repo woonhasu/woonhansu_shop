@@ -1,7 +1,14 @@
 package controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
+import model.DAO.OrdersDAO2;
+import model.DAO.ProductDAO2;
+import model.DTO.OrdersDTO;
+import model.DTO.ProductDTO;
 import model.domain.Cart;
 import model.domain.Orders;
 import model.domain.Product;
@@ -9,17 +16,6 @@ import model.domain.Users;
 import util.DBUtil;
 
 public class Controller {
-
-	public static void main(String[] args) {
-		EntityManager em = DBUtil.getEntityManager();
-		
-		System.out.println(em.find(Product.class, 1L));
-		System.out.println(em.find(Cart.class, 1L));
-		System.out.println(em.find(Users.class, "noowah"));
-		System.out.println(em.find(Orders.class, 1L));
-		
-	}
-	
 	//하운
 	//한나
 	//지수
