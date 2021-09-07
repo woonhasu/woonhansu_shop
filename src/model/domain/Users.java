@@ -2,12 +2,14 @@ package model.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -16,6 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
@@ -23,18 +26,14 @@ public class Users {
 	@Id
 	private String id;
 	
-	@NonNull
 	private String pw;
 	
 	private Integer admin;
 	
-	@NonNull
 	private String name;
 	
-	@NonNull
 	private String address;
 	
-	@NonNull
 	private String phone;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="users")
@@ -47,7 +46,7 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", pw=" + pw + ", admin=" + admin + ", name=" + name + ", address=" + address
-				+ ", phone=" + phone + ", orderList=" + ", cartList=" + "]";
+				+ ", phone=" + phone + "]";
 	}
 	
 	

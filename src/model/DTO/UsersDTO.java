@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import model.domain.Orders;
+import model.domain.Users;
 
 public class UsersDTO {
 	
@@ -13,9 +14,14 @@ public class UsersDTO {
 	public static class Create {
 		private String id;
 		private String pw;
+		private Integer admin;
 		private String name;
 		private String address;
 		private String phone;
+		
+		public Users toEntity() {
+			return Users.builder().id(id).pw(pw).admin(admin).name(name).address(address).phone(phone).build();
+		}
     }
 	
 	@Data
@@ -47,5 +53,5 @@ public class UsersDTO {
 		private String id;
 		private List<Cart> cartList;
     }
-	
+
 }
