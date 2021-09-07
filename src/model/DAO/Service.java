@@ -1,10 +1,14 @@
 package model.DAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import exception.NotExistException;
+import model.DTO.CartDTO;
 import model.DTO.ProductDTO;
 import model.DTO.UsersDTO;
+import model.domain.Product;
+import model.domain.Users;
 
 public class Service {
 	
@@ -18,6 +22,7 @@ public class Service {
 	
 	private static UsersDAO usersDAO = UsersDAO.getInstance();
 	private static ProductDAO productDAO = ProductDAO.getInstance();
+	private static CartDAO cartDAO = CartDAO.getInstance();
 	
 	
 	/** 회원가입 >> 지수
@@ -77,14 +82,148 @@ public class Service {
 		return cAll;
 	}
 	
-	public static void main(String[] args) throws NotExistException {
-//		UsersDTO.Create user = new UsersDTO.Create("jisu20", "pw", 0, "배지수", "집", "010");
-//		System.out.println(addUser(user));
+//	public static void main(String[] args) throws NotExistException {
+////		UsersDTO.Create user = new UsersDTO.Create("jisu20", "pw", 0, "배지수", "집", "010");
+////		System.out.println(addUser(user));
+//		
+//		System.out.println(getAllProducts());
+//		
+//		System.out.println(getProduct("조거팬츠"));
+//		
+//		System.out.println(getCategoryProduct("상의"));
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Car CRUD
+		public static List<CartDTO.Get> getCartAll() {
+			return cartDAO.getCartAll();
+		}
 		
-		System.out.println(getAllProducts());
+		public static boolean insertCart(Users user, Product product) {
+			return cartDAO.insertCart(user, product);
+		}
 		
-		System.out.println(getProduct("조거팬츠"));
+		public static boolean deleteCart(Long idx) {
+			return cartDAO.deleteCart(idx);
+		}
 		
-		System.out.println(getCategoryProduct("상의"));
-	}
+		public static void main(String[] args) {
+			List<CartDTO.Get> a = getCartAll();
+			a.forEach(v -> {
+				System.out.println(v.getProduct());
+			});
+		}
+	
+	
+	
+	
+
 }
