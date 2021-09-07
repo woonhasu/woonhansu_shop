@@ -26,7 +26,7 @@ public class Users {
 	@NonNull
 	private String pw;
 	
-	private byte admin;
+	private Integer admin;
 	
 	@NonNull
 	private String name;
@@ -43,9 +43,12 @@ public class Users {
 	// mappedBy 같아도 되는지 확인
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="users")
 	private List<Cart> cartList;
-	
+
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", pw=" + pw + ", name=" + name + ", address=" + address + ", phone=" + phone + "]";
+		return "Users [id=" + id + ", pw=" + pw + ", admin=" + admin + ", name=" + name + ", address=" + address
+				+ ", phone=" + phone + ", orderList=" + ", cartList=" + "]";
 	}
+	
+	
 }

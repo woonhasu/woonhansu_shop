@@ -2,12 +2,14 @@ package model.DTO;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import model.domain.Orders;
 
 public class UsersDTO {
 	
 	@Data
+	@AllArgsConstructor
 	public static class Create {
 		private String id;
 		private String pw;
