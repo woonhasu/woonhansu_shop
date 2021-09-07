@@ -52,7 +52,7 @@ public class UsersDAO {
 		
 		try {
 			Users u = em.find(Users.class, userId);
-			user = new UsersDTO.Get(u.getId(), u.getPw(), u.getAdmin(), u.getName(), u.getAddress());
+			user = new UsersDTO.Get(u.getId(), u.getPw(), u.getAdmin(), u.getName(), u.getAddress(), u.getPhone());
 		}catch(Exception e) {
 			//e.printStackTrace();
 		}finally {

@@ -47,6 +47,7 @@ public class UsersDTO {
 		private Integer admin;
 		private String name;
 		private String address;
+		private String phone;
 	}
 	
 	@Data
