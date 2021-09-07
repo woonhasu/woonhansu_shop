@@ -42,6 +42,28 @@ public class UsersDAO {
 		}
 		return result;
 	}
+
+	public UsersDTO.LogIn login(String id, String pw) {
+		EntityManager em = DBUtil.getEntityManager();
+		UsersDTO.LogIn user = null;
+		Users check = null;
+		
+		try {
+			check = em.find(Users.class, id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			em.close();
+			em = null;
+		}
+		
+		if(check.getId().equals(id) && check.getPw().equals(pw)) {
+			user = new UsersDTO.LogIn();
+			user.setId(id);
+			user.setPw(pw);
+		}
+		return user;
+	}
 	
 	/** 회원 정보 수정 ** request, update 나눠서  >> 지수
 	 * 

@@ -120,9 +120,33 @@ public class ProductDAO {
 		}
 		return result;
 	}
+
+	public static ProductDTO.Get getProductByIdx(Long idx) {
+		EntityManager em = DBUtil.getEntityManager();
+		
+		ProductDTO.Get product = null;
+		
+		Product p = em.find(Product.class, idx);
+		
+		System.out.println(p);
+		
+		try {
+			product = new ProductDTO.Get();
+			product.setIdx(p.getIdx());
+			product.setCategory(p.getCategory());
+			product.setName(p.getName());
+			product.setPrice(p.getPrice());
+			product.setColor(p.getColor());
+			product.setPsize(p.getPsize());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return product;
+	}
 	
 	/** 제품 수정 ** request, update 나눠서(보류)
 	 * 
 	 */
-
 }
