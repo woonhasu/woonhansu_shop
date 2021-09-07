@@ -40,7 +40,7 @@ public class ProductDAO {
 		return all;
 	}
 	
-	/** 제품 이름으로 단일 조회 >> 지수
+	/** 제품 이름으로 다중 조회 >> 지수
 	 * 
 	 */
 	public ArrayList<ProductDTO.Get> getProduct(String name) {

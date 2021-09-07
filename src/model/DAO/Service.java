@@ -32,10 +32,25 @@ public class Service {
 		return usersDAO.addUser(user);
 	}
 	
+	/** 회원 정보 단일 조회 >> 지수
+	 * @throws NotExistException 
+	 * 
+	 */
+	public static UsersDTO.Get getUser(String userId) throws NotExistException {
+		UsersDTO.Get user = usersDAO.getUser(userId);
+		if(user == null) {
+			throw new NotExistException("해당 ID 고객 정보가 존재하지 않습니다.");
+		}
+		
+		return user;
+	}
 	
 	/** 회원 정보 수정 ** request, update 나눠서  >> 지수
 	 * 
 	 */
+	public static boolean updateUser(String userId, UsersDTO.Update newUser) {
+		return usersDAO.updateUser(userId, newUser);
+	}
 	
 	/** 제품 다중(전체) 조회 >> 지수
 	 * 
@@ -52,7 +67,7 @@ public class Service {
 		return all;
 	}
 	
-	/** 제품 이름으로 단일 조회 >> 지수
+	/** 제품 이름으로 다중 조회 >> 지수
 	 * 
 	 */
 	public static ArrayList<ProductDTO.Get> getProduct(String name) throws NotExistException {

@@ -26,7 +26,8 @@ public class ProductDTO {
     }
 	
 	@Data
-	public static class Update extends Delete {
+	public static class Update {
+		private Long idx;
 		private String name;
 		private Integer price;
 		private String color;
@@ -38,8 +39,13 @@ public class ProductDTO {
     }
 	
 	@Data
-	public static class Get extends Create {
+	public static class Get {
 		private Long idx;
+		private String category;
+		private String name;
+		private Integer price;
+		private String color;
+		private String psize;
 	}
 
 }
