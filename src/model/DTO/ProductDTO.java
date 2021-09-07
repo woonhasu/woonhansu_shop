@@ -2,11 +2,13 @@ package model.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 public class ProductDTO {
 	
 	@Data
 	@AllArgsConstructor
+	@NoArgsConstructor
 	public static class Create {
 		private String category;
 		private String name;

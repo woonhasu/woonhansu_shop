@@ -2,8 +2,8 @@ package model.domain;
 
 import java.util.List;
 
+import model.DAO.CartDAO;
 import model.DTO.CartDTO;
-import model.dao.CartDAO;
 
 public class Service {
 
