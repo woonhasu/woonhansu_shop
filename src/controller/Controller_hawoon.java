@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.DAO.Service;
 import model.domain.Cart;
 import model.domain.Orders;
 import model.domain.Product;
-import model.domain.Service;
 import model.domain.Users;
 import util.DBUtil;
 

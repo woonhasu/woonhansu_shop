@@ -4,6 +4,8 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import model.domain.Orders;
 import model.domain.Users;
 
@@ -25,7 +27,8 @@ public class UsersDTO {
     }
 	
 	@Data
-	public static class Update extends Delete {
+	@AllArgsConstructor
+	public static class Update {
 		private String pw;
 		private String address;
 		private String phone;
@@ -35,6 +38,16 @@ public class UsersDTO {
 	public static class Delete {
 		private String id;
     }
+	
+	@Data
+	@AllArgsConstructor
+	public static class Get {
+		private String id;
+		private String pw;
+		private Integer admin;
+		private String name;
+		private String address;
+	}
 	
 	@Data
 	public static class LogIn {

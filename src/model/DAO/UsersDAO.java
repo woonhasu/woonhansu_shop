@@ -43,8 +43,55 @@ public class UsersDAO {
 		return result;
 	}
 	
+	/** 회원 정보 단일 조회 >> 지수
+	 * 
+	 */
+	public UsersDTO.Get getUser(String userId) {
+		EntityManager em = DBUtil.getEntityManager();
+		UsersDTO.Get user = null;
+		
+		try {
+			Users u = em.find(Users.class, userId);
+			user = new UsersDTO.Get(u.getId(), u.getPw(), u.getAdmin(), u.getName(), u.getAddress());
+		}catch(Exception e) {
+			//e.printStackTrace();
+		}finally {
+			em.close();
+			em = null;
+		}
+		
+		return user;
+	}  
+	
 	/** 회원 정보 수정 ** request, update 나눠서  >> 지수
 	 * 
 	 */
+	public boolean updateUser(String userId, UsersDTO.Update newUser) {
+		EntityManager em = DBUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		boolean result = false;
+		
+		tx.begin();
+		
+		try {
+			Users user = em.find(Users.class, userId);
+			
+			if(user != null) {
+				user.setPw(newUser.getPw());
+				user.setAddress(newUser.getAddress());
+				user.setPhone(newUser.getPhone());
+			}
+			tx.commit();
+			result = true;
+		
+		}catch(Exception e) {
+			tx.rollback();
+		}finally {
+			em.close();
+			em = null;
+		}
+		
+		return result;
+	}
 
 }
