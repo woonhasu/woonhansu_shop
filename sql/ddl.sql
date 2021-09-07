@@ -54,7 +54,7 @@ CREATE TABLE users
 (
     id         VARCHAR2(20)     PRIMARY KEY,
     pw         VARCHAR2(20)     NOT NULL, 
-    admin	   RAW(1)			NOT NULL,
+    admin	   NUMBER(1)		NOT NULL,
     name       VARCHAR2(20)     NOT NULL, 
     address    VARCHAR2(300)    NOT NULL, 
     phone      VARCHAR2(20)     NOT NULL 

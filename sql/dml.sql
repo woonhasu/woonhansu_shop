@@ -1,4 +1,4 @@
-INSERT INTO product VALUES(product_SEQ.NEXTVAL, '상의', '캐시미어니트' 70000, 'grey', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, '상의', '캐시미어니트', 70000, 'grey', 'free');
 INSERT INTO product VALUES(product_SEQ.NEXTVAL, '하의', '조거팬츠', 38000, 'black', 'free');
 
 INSERT INTO users VALUES('admin', 'adminpw', '1', '관리자', '관리자집', '01012345678');
