@@ -26,6 +26,8 @@ public class Users {
 	@NonNull
 	private String pw;
 	
+	private byte admin;
+	
 	@NonNull
 	private String name;
 	

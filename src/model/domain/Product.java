@@ -35,6 +35,9 @@ public class Product {
 	private String name;
 	
 	@NonNull
+	private String category;
+	
+	@NonNull
 	private Integer price;
 	
 	private String color;
