@@ -106,7 +106,6 @@ public class Controller_hawoon extends HttpServlet {
 		request.getRequestDispatcher(url).forward(request, response);	
 	}
 	
-
 	// 장바구니 삭제 (수정 중)
 	public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";

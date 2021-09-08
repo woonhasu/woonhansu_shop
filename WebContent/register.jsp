@@ -13,6 +13,7 @@
 	<div class="login">
 		<form action="controller?command=login">
 			<h3>아이디를 입력하세요</h3>
+
 			<input class="inputBox" type="text" name="id" required><br>
 			<h3>비밀번호를 입력하세요</h3>
 			<input class="inputBox" type="password" name="pw" required><br>

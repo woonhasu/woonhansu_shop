@@ -16,6 +16,7 @@
 
 	<div id="shopList">
 		<!-- 여기서 getAll() 을 통한  -->
+
 		<!-- 여기다 제품들 출력 가능할듯!!! -->
 		<c:forEach items="${requestScope.productAll}" var="product">
 			<div class="product">

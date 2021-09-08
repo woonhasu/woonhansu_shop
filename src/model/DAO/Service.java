@@ -1,11 +1,15 @@
 package model.DAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import exception.NotExistException;
 import model.DTO.CartDTO;
+import model.DTO.OrdersDTO;
 import model.DTO.ProductDTO;
+import model.DTO.ProductDTO.Create;
+import model.DTO.ProductDTO.Get;
 import model.DTO.UsersDTO;
 import model.domain.Product;
 import model.domain.Users;
@@ -255,4 +259,182 @@ public class Service {
 	
 	
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//주문 조회
+		public static List<OrdersDTO> getAllOrders() throws SQLException {
+			List<OrdersDTO> all = OrdersDAO.getAllOrders();
+			if(all == null) {
+				System.out.println("주문 정보를 찾을 수 없습니다.");
+//				throw new NotExistException("제품 정보를 찾을 수 없습니다.");
+			}
+			if(all.size() == 0) {
+				System.out.println("주문 정보가 존재하지 않습니다.");
+//				throw new NotExistException("제품 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
+			}
+			return all;
+		}
+		
+		
+		//주문 삭제
+		public static boolean deleteOrders(Long idx) throws SQLException {
+		return OrdersDAO.deleteOrders(idx);
+		}
+		
+		// 확인 해봐야함. 
+		// 제품 추가
+		public static boolean addProduct(Create idx) throws SQLException {
+			return ProductDAO.addProduct(idx);
+		}
+		
+		//제품 삭제
+		public static boolean deleteProduct(Long idx) throws SQLException {
+			return ProductDAO.deleteProduct(idx);
+		}
+		
+		//제품 수정
+		public static boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
+			return productDAO.updateProduct(idx, newProduct);
+		}
+		
 }
