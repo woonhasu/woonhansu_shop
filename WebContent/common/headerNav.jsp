@@ -17,7 +17,7 @@
         
         <li><a href="myPage.jsp?">My Page</a></li>
 
-				<li><a href="controller?command=getOrdersAll">Orders</a></li>
+				<li><a href="controller?command=getUserOrdersAll">Orders</a></li>
 			</c:if>
       
 			<c:if test="${empty sessionScope.user}">
