@@ -15,29 +15,34 @@
 	<br>
 	<h3>${sessionScope.user.name} 님의 장바구니입니다</h3>
 	
-	<div id="cartList">
-		
-		<table border="1">
-			<tr>
-				<th>상품코드</th>
-				<th>상품명</th>
-				<th>가격</th>
-				<th>색상</th>
-				<th>사이즈</th>
-			</tr>
-			<c:forEach items="${requestScope.cartAll}" var="cart">
+	<c:if test="${empty requestScope.cartAll}">
+		장바구니가 비어있습니다
+	</c:if>
+
+	<c:if test="${not empty requestScope.cartAll}">
+		<div id="cartList">
+
+			<table border="1">
 				<tr>
-					<td>${cart.product.idx}</td>
-					<td>${cart.product.name}</td>
-					<td>${cart.product.price}</td>
-					<td>${cart.product.color}</td>
-					<td>${cart.product.psize}</td>
-					<td><a href="controller?command=addOrder">주문하기</a></td>
-					<td><a href="controller?command=deleteCart&idx=${cart.product.idx}">삭제하기</a></td>
+					<th>상품코드</th>
+					<th>상품명</th>
+					<th>가격</th>
+					<th>색상</th>
+					<th>사이즈</th>
 				</tr>
-			</c:forEach>
-		</table>
-	</div>
+				<c:forEach items="${requestScope.cartAll}" var="cart">
+					<tr>
+						<td>${cart.product.idx}</td>
+						<td>${cart.product.name}</td>
+						<td>${cart.product.price}</td>
+						<td>${cart.product.color}</td>
+						<td>${cart.product.psize}</td>
+						<td><a href="controller?command=addOrder">주문하기</a></td>
+						<td><a href="controller?command=deleteCart&idx=${cart.idx}">삭제하기</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+	</c:if>
 
 </body>
 </html>

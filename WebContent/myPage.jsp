@@ -16,7 +16,6 @@
 			<h3>아이디 : ${sessionScope.user.id} </h3>
 			<h3>주소 : ${sessionScope.user.address} </h3>
 			<h3>핸드폰 : ${sessionScope.user.phone} </h3>
-	
 		</form>
 	</div>
 

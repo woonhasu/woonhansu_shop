@@ -14,29 +14,16 @@
 			<li><a href="controller?command=getProductAll">Shop</a></li>
 			<c:if test="${not empty sessionScope.user}">
 				<li><a href="controller?command=logout">Sign Out</a></li>
-				<li><a href="myPage.jsp?">My Page</a></li>
+        
+        <li><a href="myPage.jsp?">My Page</a></li>
+
 				<li><a href="controller?command=getAllOrders">Orders</a></li>
 			</c:if>
+      
 			<c:if test="${empty sessionScope.user}">
 				<li><a href="login.jsp">Sign In</a></li>
 			</c:if>
-			<li><a href="controller?command=getCartAll">Cart</a></li>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
+			<li><a href="controller?command=getUserCartAll">Cart</a></li>
 		</ul>
 	</div>
 </nav>

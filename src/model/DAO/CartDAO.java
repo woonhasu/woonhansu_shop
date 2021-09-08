@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import model.DTO.CartDTO;
+import model.DTO.UsersDTO;
 import model.domain.Cart;
 import model.domain.Product;
 import model.domain.Users;
@@ -32,14 +33,14 @@ public class CartDAO {
 		list = (List<Cart>) em.createNativeQuery("select * from cart", Cart.class).getResultList();
 		
 		list.forEach(v -> {
-			alist.add(new CartDTO.Get(v.getUsers(), v.getProduct()));
+			alist.add(new CartDTO.Get(v.getIdx(), v.getUsers(), v.getProduct()));
 		});
 			
 		return alist;
 	}
 	
 	//	회원 장바구니 조회 (회원)
-	public static List<CartDTO.Get> getUserCartAll(Users user){
+	public static List<CartDTO.Get> getUserCartAll(UsersDTO.Get user){
 		EntityManager em = DBUtil.getEntityManager();
 		List<Cart> list = null;
 		
@@ -48,15 +49,14 @@ public class CartDAO {
 		list = (List<Cart>) em.createNativeQuery("select * from cart where user_id = ?", Cart.class).setParameter(1, user.getId()).getResultList();
 		
 		list.forEach(v -> {
-			alist.add(new CartDTO.Get(v.getUsers(), v.getProduct()));
+			alist.add(new CartDTO.Get(v.getIdx(), v.getUsers(), v.getProduct()));
 		});
 		
 		return alist;
 	}
 	
-	
 	// 장바구니 내역 추가
-	public static boolean insertCart(Users user, Product product) {
+	public static boolean addCart(String userId, Long productIdx) {
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
 		
@@ -65,8 +65,8 @@ public class CartDAO {
 		
 		try {
 			cart = new Cart();
-			cart.setUsers(user);
-			cart.setProduct(product);
+			cart.setUsers(em.find(Users.class, userId));
+			cart.setProduct(em.find(Product.class, productIdx));
 			
 			em.persist(cart);
 			em.getTransaction().commit();
@@ -83,7 +83,9 @@ public class CartDAO {
 		return result;
 	}
 	
-	public static boolean deleteCart(Long idx) {
+	//	장바구니 내역 삭제
+	public static boolean deleteCart(Long cartIdx) {
+		System.out.println(cartIdx);
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
 		
@@ -91,7 +93,7 @@ public class CartDAO {
 		Cart cart = null;
 		
 		try {
-			cart = em.find(Cart.class, idx);
+			cart = em.find(Cart.class, cartIdx);
 			
 			em.remove(cart);
 			em.getTransaction().commit();
