@@ -3,9 +3,7 @@ package model.DAO;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.Order;
 
 import model.DTO.OrdersDTO;
 import model.domain.Orders;
@@ -30,6 +28,8 @@ public class OrdersDAO {
 			em.close();
 			em = null;
 		}
+		
+		System.out.println("+++ " + all);
 		return all;
 	}
 
