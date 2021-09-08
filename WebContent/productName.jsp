@@ -13,7 +13,7 @@
 	<jsp:include page="common/headerNav.jsp" />
 
 	<br>
-	
+
 	<div class="search">
 		<form action="controller?command=search" method="post">
 			<input type="text" name="name" required>
@@ -32,12 +32,11 @@
 	
 	<br>
 
-
 	<div id="shopList">
 		<!-- 여기서 getAll() 을 통한  -->
 
 		<!-- 여기다 제품들 출력 가능할듯!!! -->
-		<c:forEach items="${requestScope.productAll}" var="product">
+		<c:forEach items="${requestScope.productName}" var="product">
 			<div class="product">
 				<img class="product" alt="img" src="images/${product.idx}.jpg">
 				<div class="info">
@@ -45,7 +44,7 @@
 					<p>${product.price}</p>
 					<div class="btn">
 						<a href="controller?command=addCart&idx=${product.idx}">장바구니 담기</a>
-						<a href="controller?command=addOrders&idx=${product.idx}">주문하기</a>
+						<a href="#">주문하기</a>
 					</div>
 				</div>
 			</div>

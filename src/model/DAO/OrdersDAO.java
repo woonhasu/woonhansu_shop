@@ -55,21 +55,28 @@ public class OrdersDAO {
 	}
 
 	/** 주문 취소(주문 내역 삭제) >> 한나 */
-	public static boolean deleteOrders(Long idx) throws SQLException {
+	public static boolean deleteOrders(Long idx) {
+		System.out.println(idx);
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
+		
 		boolean result = false;
+		Orders orders = null;
 
 		try {
-			em.remove(em.find(Orders.class, idx));
+			orders = em.find(Orders.class, idx);
+			
+			em.remove(orders);
 			em.getTransaction().commit();
 
 			result = true;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
+			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
+			System.out.println(result);
 		}
 		return result;
 	}
