@@ -34,11 +34,6 @@ public class ProductDTO {
     }
 	
 	@Data
-	public static class Delete {
-		private Long idx;
-    }
-	
-	@Data
 	public static class Get {
 		private Long idx;
 		private String category;

@@ -101,10 +101,41 @@ public class UsersDAO {
 				user.setPw(newUser.getPw());
 				user.setAddress(newUser.getAddress());
 				user.setPhone(newUser.getPhone());
+				
+				tx.commit();
+				result = true;
 			}
-			tx.commit();
-			result = true;
 		
+		}catch(Exception e) {
+			tx.rollback();
+		}finally {
+			em.close();
+			em = null;
+		}
+		
+		return result;
+	}
+	
+	/** 회원 탈퇴 >> 지수
+	 * 
+	 */
+	public boolean deleteUser(String userId) {
+		EntityManager em = DBUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		boolean result = false;
+		
+		tx.begin();
+		
+		try {
+			Users user = em.find(Users.class, userId);
+			
+			if(user != null) {
+				em.remove(user);
+
+				tx.commit();
+				result = true;
+			}
+			
 		}catch(Exception e) {
 			tx.rollback();
 		}finally {
