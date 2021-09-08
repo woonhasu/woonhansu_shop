@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import model.DTO.ProductDTO;
-import model.DTO.ProductDTO.Get;
 import model.domain.Product;
 import util.DBUtil;
 
@@ -146,7 +146,33 @@ public class ProductDAO {
 		return product;
 	}
 	
-	/** 제품 수정 ** request, update 나눠서(보류)
+	/** 제품 수정 ** request(?.?), update 나눠서(보류)
 	 * 
 	 */
+	public boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
+		EntityManager em = DBUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		boolean result = false;
+		
+		tx.begin();
+		
+		try {
+			Product product = em.find(Product.class, idx);
+			
+			if(product != null) {
+				product.setIdx(newProduct.getIdx());
+				product.setName(newProduct.getName());
+				product.setPrice(newProduct.getPrice());
+				product.setColor(newProduct.getColor());
+			}
+			tx.commit();
+			result = true;
+		}catch(Exception e) {
+			tx.rollback();
+		}finally {
+			em.close();
+			em = null;
+		}
+		return result;
+	}
 }

@@ -16,7 +16,7 @@
 	
 	<div id="shopList">
 		<!-- 여기서 getAll() 을 통한  -->
-		<c:forEach items="${requesScope.productAll}" var="product"> 
+		<c:forEach items="${requestScope.productAll}" var="product"> 
 			<!-- 여기다 제품들 출력 가능할듯!!! -->
 			<img class="product" alt="img" src="images/${product.idx}.jpg">
 			<div class="productInfo">

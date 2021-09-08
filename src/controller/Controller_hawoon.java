@@ -61,7 +61,7 @@ public class Controller_hawoon extends HttpServlet {
 	private void getProductAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
-			ArrayList<ProductDTO.Get> all = service.getAllProducts();
+			ArrayList<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			url = "shop.jsp";
 		} catch (Exception s) {
@@ -82,9 +82,6 @@ public class Controller_hawoon extends HttpServlet {
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
-	/** �옣諛붽뎄�땲�뿉 �젣�뭹 異붽� >> �븯�슫
-	 * 
-	 */
 	public void insertCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
@@ -99,9 +96,6 @@ public class Controller_hawoon extends HttpServlet {
 		request.getRequestDispatcher(url).forward(request, response);	
 	}
 	
-	/** �옣諛붽뎄�땲 �젣�뭹 �궘�젣  >> �븯�슫
-	 * 
-	 */
 	public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
