@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DAO.Service;
 import model.DTO.ProductDTO;
 import model.DTO.UsersDTO;
+import model.DTO.UsersDTO.Get;
+import model.domain.Users;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
@@ -19,6 +22,7 @@ public class Controller extends HttpServlet {
 	private static Service service = Service.getInstance();
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String command = request.getParameter("command");
 		
 		if(command.equals("login")){
@@ -33,6 +37,12 @@ public class Controller extends HttpServlet {
 			//아직 없다!!
 		} else if(command.equals("deleteCart")) {
 			deleteCart(request, response);
+		} else if(command.equals("signin")) {
+			addUser(request, response);
+		} else if(command.equals("userUpdate")) {
+			updateUser(request, response);
+		} else if(command.equals("userDelete")) {
+			deleteUser(request, response);
 		}
 	}
 	
@@ -69,6 +79,7 @@ public class Controller extends HttpServlet {
 	
 
 	//	로그인
+	// 로그인 실패 메세지 출력 하도록 수정 필요ㅠ
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		String id = request.getParameter("id");
@@ -105,6 +116,7 @@ public class Controller extends HttpServlet {
 			request.setAttribute("productAll", all);
 			url = "shop.jsp";
 		} catch (Exception s) {
+			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
@@ -219,30 +231,13 @@ public class Controller extends HttpServlet {
 		try {
 			boolean result = service.addUser(user);
 			if(result) {
-				request.setAttribute("user", user);
-				request.setAttribute("successMsg", "회원 가입 완료");
-				url = "users/usersDetail.jsp";
+				request.getSession().setAttribute("user", user);
+				login(request, response);
 			}else {
 				request.setAttribute("errorMsg", "회원 가입 실패");
 			}
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-		}
-		request.getRequestDispatcher(url).forward(request, response);
-	}
-	
-	/** 회원 정보 수정 요청  >> 지수
-	 * 
-	 */
-	public void updateUserReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "showError.jsp";
-		
-		try {
-			request.setAttribute("user", service.getUser(request.getParameter("userId")));
-			url = "users/usersUpdate.jsp";
-		}catch(Exception e) {
-			request.setAttribute("errorMsg", e.getMessage());
-			//e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -260,10 +255,13 @@ public class Controller extends HttpServlet {
 		UsersDTO.Update newUser = new UsersDTO.Update(pw, address, phone);
 		
 		try {
-			boolean result = service.updateUser(request.getParameter("userId"), newUser);
+			HttpSession session = request.getSession();
+			UsersDTO.Get user = (UsersDTO.Get) session.getAttribute("user");
+			boolean result = service.updateUser(user.getId(), newUser);
 			if(result) {
-				request.setAttribute("user", service.getUser(request.getParameter("userId")));
-				url = "users/usersDetail.jsp";
+				request.getSession().setAttribute("user", service.getUser(user.getId()));
+				url = "myPage.jsp";
+				request.setAttribute("successMsg", "수정 완료");
 			}else {
 				request.setAttribute("errorMsg", "수정 실패");
 			}
@@ -272,6 +270,28 @@ public class Controller extends HttpServlet {
 			//e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
+	}
+	
+	/** 회원 탈퇴 >> 지수
+	 * 
+	 */
+	public void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "showError.jsp";
+		
+		try {
+			HttpSession session = request.getSession();
+			UsersDTO.Get user = (UsersDTO.Get) session.getAttribute("user");
+			boolean result = service.deleteUser(user.getId());
+			if(result) {
+				logout(request, response);
+			}else {
+				request.setAttribute("errorMsg", "삭제 실패");
+			}
+		}catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+		
 	}
 	
 	

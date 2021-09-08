@@ -13,9 +13,9 @@
 	<div class="login">
 		<form action="controller?command=login" method="post">
 			<h3>아이디를 입력하세요</h3>
-			<input class="inputBox" type="text" name="id"><br>
+			<input class="inputBox" type="text" name="id" required><br>
 			<h3>비밀번호를 입력하세요</h3>
-			<input class="inputBox" type="password" name="pw"><br>
+			<input class="inputBox" type="password" name="pw" required><br>
 	
 			<input class="submit" type="submit" value="로그인">
 			<input class="register" onclick="location.href='register.jsp'" value="회원가입">

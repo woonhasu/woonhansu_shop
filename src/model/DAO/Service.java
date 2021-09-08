@@ -56,6 +56,13 @@ public class Service {
 		return usersDAO.updateUser(userId, newUser);
 	}
 	
+	/** 회원 탈퇴 >> 지수
+	 * 
+	 */
+	public static boolean deleteUser(String userId) {
+		return usersDAO.deleteUser(userId);
+	}
+	
 	/** 제품 다중(전체) 조회 >> 지수
 	 * 
 	 */
@@ -249,7 +256,7 @@ public class Service {
 		public UsersDTO.Get login(String id, String pw) throws NotExistException {
 			UsersDTO.Get user = usersDAO.login(id, pw);
 			if(user == null) {
-				throw new NotExistException("해당 카테고리 제품 정보를 찾을 수 없습니다.");
+				throw new NotExistException("아이디 혹은 비밀번호가 일치하지 않습니다.");
 			} else {
 				return user;
 			}

@@ -32,7 +32,7 @@ public class CartDAO {
 		list = (List<Cart>) em.createNativeQuery("select * from cart", Cart.class).getResultList();
 		
 		list.forEach(v -> {
-			alist.add(new CartDTO.Get(v.getUsers(), v.getProduct()));
+			alist.add(new CartDTO.Get(v.getIdx(), v.getUsers(), v.getProduct()));
 		});
 			
 		return alist;
@@ -48,7 +48,7 @@ public class CartDAO {
 		list = (List<Cart>) em.createNativeQuery("select * from cart where user_id = ?", Cart.class).setParameter(1, user.getId()).getResultList();
 		
 		list.forEach(v -> {
-			alist.add(new CartDTO.Get(v.getUsers(), v.getProduct()));
+			alist.add(new CartDTO.Get(v.getIdx(), v.getUsers(), v.getProduct()));
 		});
 		
 		return alist;

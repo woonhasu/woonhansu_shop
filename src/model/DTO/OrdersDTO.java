@@ -18,8 +18,11 @@ public class OrdersDTO {
     }
 	
 	@Data
-	public static class Delete {
+	public static class Get {
 		private Long idx;
+		private Users users;
+		private Product product;
+		private Date date;
     }
 
 }
