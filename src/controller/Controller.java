@@ -45,6 +45,8 @@ public class Controller extends HttpServlet {
 			addCart(request, response);
 		} else if(command.equals("getUserOrdersAll")) {
 			getUserOrdersAll(request, response);
+		} else if(command.equals("deleteOrders")) {
+			deleteOrders(request, response);
 		}
 	}
 	
@@ -437,7 +439,6 @@ public class Controller extends HttpServlet {
 				request.setAttribute("errorMsg", s.getMessage());
 				s.printStackTrace();
 			}
-			System.out.println("----------------");
 			request.getRequestDispatcher(url).forward(request, response);
 		}
 		
@@ -451,23 +452,22 @@ public class Controller extends HttpServlet {
 				request.setAttribute("errorMsg", s.getMessage());
 				s.printStackTrace();
 			}
-			System.out.println("----------------");
 			request.getRequestDispatcher(url).forward(request, response);
 		}
 		
-//		// 주문 삭제 (수정 중)
-//		public void deleteOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//			String url = "showError.jsp";
-//			try {
-//				Long idx = (long)Integer.parseInt(request.getParameter("idx"));
-//				request.setAttribute("deleteOrders", service.deleteOrders(idx));
-//				url = "orders.jsp";
-//			} catch (Exception s) {
-//				request.setAttribute("errorMsg", s.getMessage());
-//				s.printStackTrace();
-//			}
-//			request.getRequestDispatcher(url).forward(request, response);
-//		}
+		// 주문 삭제 (수정 중)
+		public void deleteOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String url = "showError.jsp";
+			try {
+				Long idx = Long.parseLong(request.getParameter("ordersIdx"));
+				service.deleteOrders(idx);
+				getUserOrdersAll(request, response);
+			} catch (Exception s) {
+				request.setAttribute("errorMsg", s.getMessage());
+				s.printStackTrace();
+			}
+			request.getRequestDispatcher(url).forward(request, response);
+		}
 		
 		// 제품 추가 (미완)
 //		public void insertCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

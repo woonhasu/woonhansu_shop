@@ -26,12 +26,4 @@ public class OrdersDTO {
 		private Product product;
 		private Date date;
     }
-
-	
-	public static void main(String [] args) {
-		OrdersDTO.Create a = new OrdersDTO.Create();
-		a.setUsers(new Users("1", "pw", 2, "name", "address", "phone", null, null));
-		System.out.println(a.getUsers().getId());
-		
-	}
 }

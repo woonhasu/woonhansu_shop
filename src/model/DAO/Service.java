@@ -9,10 +9,7 @@ import model.DTO.CartDTO;
 import model.DTO.OrdersDTO;
 import model.DTO.ProductDTO;
 import model.DTO.ProductDTO.Create;
-import model.DTO.ProductDTO.Get;
 import model.DTO.UsersDTO;
-import model.domain.Product;
-import model.domain.Users;
 
 public class Service {
 	
@@ -27,6 +24,7 @@ public class Service {
 	private static UsersDAO usersDAO = UsersDAO.getInstance();
 	private static ProductDAO productDAO = ProductDAO.getInstance();
 	private static CartDAO cartDAO = CartDAO.getInstance();
+	private static OrdersDAO ordersDAO = OrdersDAO.getInstance();
 	
 	
 	/** 회원가입 >> 지수
@@ -218,7 +216,7 @@ public class Service {
 	
 	
 	
-		// Car CRUD
+		// Cart CRUD
 		public static List<CartDTO.Get> getUserCartAll(UsersDTO.Get user) throws NotExistException {
 			List<CartDTO.Get> cart = cartDAO.getUserCartAll(user);
 			if(cart == null) {
@@ -398,43 +396,45 @@ public class Service {
 		
 		//	주문 조회
 		public static List<OrdersDTO.Get> getOrdersAll() throws SQLException, NotExistException {
-			List<OrdersDTO.Get> all = OrdersDAO.getOrdersAll();
+			List<OrdersDTO.Get> all = ordersDAO.getOrdersAll();
 			if(all == null) {
 				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
 			}
 			if(all.size() == 0) {
-				throw new NotExistException("주문 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
+				throw new NotExistException("주문 정보가 존재하지 않습니다.");
+			} else {
+				return all;
 			}
-			return all;
 		}
 		
 		public Object getUserOrdersAll(model.DTO.UsersDTO.Get user) throws NotExistException {
-			List<OrdersDTO.Get> all = OrdersDAO.getUserOrdersAll(user);
+			List<OrdersDTO.Get> all = ordersDAO.getUserOrdersAll(user);
 			if(all == null) {
 				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
 			}
 			if(all.size() == 0) {
 				throw new NotExistException("주문 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
+			} else {
+				return all;
 			}
-			return all;
 		}
 		
 		
 		
-		//	주문 삭제
+		//	주문 삭제-------------------------------------
 		public static boolean deleteOrders(Long idx) throws SQLException {
-		return OrdersDAO.deleteOrders(idx);
+			return ordersDAO.deleteOrders(idx);
 		}
 		
 		// 확인 해봐야함. 
 		// 제품 추가
 		public static boolean addProduct(Create idx) throws SQLException {
-			return ProductDAO.addProduct(idx);
+			return productDAO.addProduct(idx);
 		}
 		
 		//제품 삭제
 		public static boolean deleteProduct(Long idx) throws SQLException {
-			return ProductDAO.deleteProduct(idx);
+			return productDAO.deleteProduct(idx);
 		}
 		
 		//제품 수정
