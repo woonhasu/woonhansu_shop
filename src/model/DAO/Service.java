@@ -221,7 +221,7 @@ public class Service {
 	
 	
 	
-	// Car CRUD
+		// Car CRUD
 		public static List<CartDTO.Get> getCartAll() {
 			return cartDAO.getCartAll();
 		}
@@ -246,8 +246,8 @@ public class Service {
 			return productDAO.getProductByIdx(idx);
 		}
 
-		public UsersDTO.LogIn login(String id, String pw) throws NotExistException {
-			UsersDTO.LogIn user = usersDAO.login(id, pw);
+		public UsersDTO.Get login(String id, String pw) throws NotExistException {
+			UsersDTO.Get user = usersDAO.login(id, pw);
 			if(user == null) {
 				throw new NotExistException("해당 카테고리 제품 정보를 찾을 수 없습니다.");
 			} else {

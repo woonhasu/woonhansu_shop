@@ -84,10 +84,9 @@
 	background-color: #9BB6DE;
 }
 
-/* shopList*/
+/* shopList */
 #shopList {
 	margin: auto;
-	padding-top: 10px;
 	max-width: 80%;
 	display: grid;
 	grid-gap: 0.3rem;
@@ -97,23 +96,36 @@
 }
 
 .product {
-	position: relative;
+	display: flex;
 	flex-direction: column;
-	background-color: #C4D1F5;
+	justify-content: space-between;
 }
 
 img {
 	width: 100%;
-	position: absolute;
 	object-fit: contain;
 }
 
-.productInfo {
+.info {
 	position: relative;
-	margin: 10px;
 }
 
-/* shopList*/
+.btn {
+	position: relative;
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+
+.info a{
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.info a:link{
+	text-decoration: none;
+}
+
+/* loginPage */
 .login {
 	display: flex;
 	justify-content: center;
@@ -159,4 +171,29 @@ img {
 
 .submit:hover {
 	cursor: pointer;
+}
+
+/* myPage */
+.myPage{
+	display: flex;
+	justify-content: center;
+	padding-top: 10%;
+	max-height: 100vh;
+	position: relative;
+	text-align: left;
+}
+
+.myPage h3{
+	font-size: 1rem;
+	padding: 5px;
+}
+
+.myPage form {
+	display: flex;
+	flex-direction: column;
+	width: 450px;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 30px;
+	align-content: center;
 }
