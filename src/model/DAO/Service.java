@@ -108,16 +108,6 @@ public class Service {
 		return cAll;
 	}
 	
-//	public static void main(String[] args) throws NotExistException {
-////		UsersDTO.Create user = new UsersDTO.Create("jisu20", "pw", 0, "배지수", "집", "010");
-////		System.out.println(addUser(user));
-//		
-//		System.out.println(getAllProducts());
-//		
-//		System.out.println(getProduct("조거팬츠"));
-//		
-//		System.out.println(getCategoryProduct("상의"));
-//	}
 	
 	
 	
@@ -407,8 +397,8 @@ public class Service {
 		
 		
 		//주문 조회
-		public static List<OrdersDTO> getAllOrders() throws SQLException {
-			List<OrdersDTO> all = OrdersDAO.getAllOrders();
+		public static List<OrdersDTO> getOrdersAll() throws SQLException {
+			List<OrdersDTO> all = OrdersDAO.getOrdersAll();
 			if(all == null) {
 				System.out.println("주문 정보를 찾을 수 없습니다.");
 //				throw new NotExistException("제품 정보를 찾을 수 없습니다.");

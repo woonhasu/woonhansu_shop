@@ -18,7 +18,7 @@ public class OrdersDAO {
 	}
 
 	/** 주문내역 조회 >> 한나 */
-	public static List<OrdersDTO> getAllOrders() throws SQLException {
+	public static List<OrdersDTO> getOrdersAll() throws SQLException {
 		EntityManager em = DBUtil.getEntityManager();
 
 		List<OrdersDTO> all = null;

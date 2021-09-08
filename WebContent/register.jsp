@@ -11,7 +11,7 @@
 	<jsp:include page="common/headerNav.jsp"/>
 
 	<div class="login"> 
-		<form action="controller?command=signin" method="post">
+		<form action="controller?command=register" method="post">
 			<h3>계정 유형을 선택하세요</h3>
 			<div>
 				<input class="inputBox" type="radio" name="admin" value="1">관리자

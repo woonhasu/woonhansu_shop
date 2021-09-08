@@ -33,7 +33,7 @@
 				 	<td> ${orders.users.id} </td>
 					<td> ${orders.product.idx} </td>
 					<td> ${orders.date} </td>
-					<td><a href="controller?command=getAllOrders">주문내역</a></td>
+					<td><a href="controller?command=getOrdersAll">주문내역</a></td>
 					<td><a href="controller?command=deleteOrders">주문 취소</a></td>
 				</tr>
 			</c:forEach>

@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 import model.DAO.Service;
 import model.DTO.ProductDTO;
 import model.DTO.UsersDTO;
-import model.DTO.UsersDTO.Get;
-import model.domain.Users;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
@@ -37,7 +35,7 @@ public class Controller extends HttpServlet {
 			//아직 없다!!
 		} else if(command.equals("deleteCart")) {
 			deleteCart(request, response);
-		} else if(command.equals("signin")) {
+		} else if(command.equals("register")) {
 			addUser(request, response);
 		} else if(command.equals("userUpdate")) {
 			updateUser(request, response);
@@ -45,8 +43,8 @@ public class Controller extends HttpServlet {
 			deleteUser(request, response);
 		} else if(command.equals("addCart")) {
 			addCart(request, response);
-		} else if(command.equals("getAllOrders")) {
-			getAllOrders(request, response);
+		} else if(command.equals("getOrdersAll")) {
+			getOrdersAll(request, response);
 		}
 	}
 	
@@ -430,10 +428,10 @@ public class Controller extends HttpServlet {
 	
 	
 	// 전체 주문조회 (유저 주문 조회로 바꿔야 함)
-		public void getAllOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		public void getOrdersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String url = "showError.jsp";
 			try {
-				request.setAttribute("OrdersAll", service.getAllOrders());
+				request.setAttribute("OrdersAll", service.getOrdersAll());
 				url = "orders.jsp";
 			} catch (Exception s) {
 				request.setAttribute("errorMsg", s.getMessage());
