@@ -33,6 +33,7 @@
 					<td>${cart.product.color}</td>
 					<td>${cart.product.psize}</td>
 					<td><a href="controller?command=addOrder">주문하기</a></td>
+					<td><a href="controller?command=deleteCart&idx=${cart.product.idx}">삭제하기</a></td>
 				</tr>
 			</c:forEach>
 		</table>

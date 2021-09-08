@@ -18,10 +18,16 @@
 		<!-- 여기서 getAll() 을 통한  -->
 		<!-- 여기다 제품들 출력 가능할듯!!! -->
 		<c:forEach items="${requestScope.productAll}" var="product">
-			<div class="productInfo">
+			<div class="product">
 				<img class="product" alt="img" src="images/${product.idx}.jpg">
-				<h3>${product.name}</h3>
-				<p>${product.price}</p>
+				<div class="info">
+					<h3>${product.name}</h3>
+					<p>${product.price}</p>
+					<div class="btn">
+						<a href="#">장바구니 담기</a>
+						<a href="#">주문하기</a>
+					</div>
+				</div>
 			</div>
 
 		</c:forEach>

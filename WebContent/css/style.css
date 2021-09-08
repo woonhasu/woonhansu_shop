@@ -87,7 +87,6 @@
 /* shopList */
 #shopList {
 	margin: auto;
-	padding-top: 10px;
 	max-width: 80%;
 	display: grid;
 	grid-gap: 0.3rem;
@@ -97,20 +96,33 @@
 }
 
 .product {
-	position: relative;
+	display: flex;
 	flex-direction: column;
-	background-color: #C4D1F5;
+	justify-content: space-between;
 }
 
 img {
 	width: 100%;
-	position: absolute;
 	object-fit: contain;
 }
 
-.productInfo {
+.info {
 	position: relative;
-	margin: 10px;
+}
+
+.btn {
+	position: relative;
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+
+.info a{
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.info a:link{
+	text-decoration: none;
 }
 
 /* loginPage */
