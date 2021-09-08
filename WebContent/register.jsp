@@ -13,16 +13,16 @@
 	<div class="login">
 		<form action="controller?command=login">
 			<h3>아이디를 입력하세요</h3>
-			<input class="inputBox" type="text" name="id"><br>
+			<input class="inputBox" type="text" name="id" required="required"><br>
 			<h3>비밀번호를 입력하세요</h3>
-			<input class="inputBox" type="password" name="pw"><br>
+			<input class="inputBox" type="password" name="pw" required="required"><br>
 			<h3>이름</h3>
-			<input class="inputBox" type="text" name="pw"><br>
+			<input class="inputBox" type="text" name="pw" required="required"><br>
 			<h3>주소</h3>
-			<input class="inputBox" type="text" name="pw"><br>
+			<input class="inputBox" type="text" name="pw" required="required"><br>
 			<h3>연락처</h3>
-			<input class="inputBox" type="text" name="pw"><br>
-			<input class="register" onclick="" value="회원가입">
+			<input class="inputBox" type="text" name="pw" required="required"><br>
+			<input class="register" type="submit" value="회원가입">
 		</form>
 	</div>
 
