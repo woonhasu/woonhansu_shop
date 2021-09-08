@@ -35,6 +35,8 @@ public class Controller extends HttpServlet {
 			deleteCart(request, response);
 		} else if(command.equals("addCart")) {
 			addCart(request, response);
+		} else if(command.equals("getAllOrders")) {
+			getAllOrders(request, response);
 		}
 	}
 	
@@ -313,5 +315,143 @@ public class Controller extends HttpServlet {
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 전체 주문조회 (유저 주문 조회로 바꿔야 함)
+		public void getAllOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String url = "showError.jsp";
+			try {
+				request.setAttribute("OrdersAll", service.getAllOrders());
+				url = "orders.jsp";
+			} catch (Exception s) {
+				request.setAttribute("errorMsg", s.getMessage());
+				s.printStackTrace();
+			}
+			System.out.println("----------------");
+			request.getRequestDispatcher(url).forward(request, response);
+		}
+		
+//		// 주문 삭제 (수정 중)
+//		public void deleteOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//			String url = "showError.jsp";
+//			try {
+//				Long idx = (long)Integer.parseInt(request.getParameter("idx"));
+//				request.setAttribute("deleteOrders", service.deleteOrders(idx));
+//				url = "orders.jsp";
+//			} catch (Exception s) {
+//				request.setAttribute("errorMsg", s.getMessage());
+//				s.printStackTrace();
+//			}
+//			request.getRequestDispatcher(url).forward(request, response);
+//		}
+		
+		// 제품 추가 (미완)
+//		public void insertCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//			String url = "showError.jsp";
+//			try {
+//				Long idx = (long)Integer.parseInt(request.getParameter("idx"));
+//				ProductDTO.Get product = service.getProductByIdx(idx);
+////				request.setAttribute("insertCart", service.insertCart(request.getSession().getAttribute("user"), product);
+//				url = "cart.jsp";
+//			} catch (Exception s) {
+//				request.setAttribute("errorMsg", s.getMessage());
+//				s.printStackTrace();
+//			}
+//			request.getRequestDispatcher(url).forward(request, response);	
+//		}
+		
+		
 	
 }
