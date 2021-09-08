@@ -352,14 +352,14 @@ public class Controller extends HttpServlet {
 	 * 
 	 */
 	public void getProductByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "showError.jsp";
+		String url = "productName.jsp";
 		String name = request.getParameter("name");
 		
 		try {
 			ArrayList<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			request.setAttribute("productName", service.getProductByName(name));
-			url = "productName.jsp";
+			
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			//e.printStackTrace();
@@ -371,15 +371,14 @@ public class Controller extends HttpServlet {
 	 * 
 	 */
 	public void getProductByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "showError.jsp";
+		String url = "productCategory.jsp";
 		String category = request.getParameter("category");
 		
-
 		try {
 			ArrayList<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			request.setAttribute("productCategory", service.getProductByCategory(category));
-			url = "productCategory.jsp";
+			
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			//e.printStackTrace();

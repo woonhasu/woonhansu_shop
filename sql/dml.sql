@@ -1,10 +1,11 @@
-INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'ìƒì˜', 'ìºì‹œë¯¸ì–´ë‹ˆíŠ¸', 70000, 'grey', 'free');
-INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'í•˜ì˜', 'ì¡°ê±°íŒ¬ì¸ ', 38000, 'black', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'bottom', 'ÄÚÆ°ÆÒÃ÷', 40000, 'beige', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'setup', '¿Ãºí·¢ ¼Â¾÷', 68000, 'black', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'top', '½ºÆ®¶óÀÌÇÁ ¼ÅÃ÷', 34000, 'blue', 'free');
 
-INSERT INTO users VALUES('admin', 'adminpw', '1', 'ê´€ë¦¬ì', 'ê´€ë¦¬ìì§‘', '01012345678');
-INSERT INTO users VALUES('geesuee', 'jisu', '0', 'ë°°ì§€ìˆ˜', 'ì¸ì²œ ì¤‘êµ¬ í•˜ëŠ˜ë³„ë¹›ë¡œ 121', '01030576577');
-INSERT INTO users VALUES('noowah', 'noowah', '0', 'ì¡°í•˜ìš´', 'ì„œìš¸ ì€í‰êµ¬ ë¶ˆê´‘ë¡œ 16ê¸¸ 25-7 2ì¸µ', '01044460410');
-INSERT INTO users VALUES('paparo2', 'papa', '0', 'ê¹€í•œë‚˜', 'ê²½ê¸°ë„ ì‚¼í‰ë™ ë™íŒêµë¡œ 212', '01066000028');
+INSERT INTO users VALUES('admin', 'adminpw', '1', '°ü¸®ÀÚ', '°ü¸®ÀÚÁı', '01012345678');
+INSERT INTO users VALUES('geesuee', 'jisu', '0', '¹èÁö¼ö', 'ÀÎÃµ Áß±¸ ÇÏ´Ãº°ºû·Î 121', '01030576577');
+INSERT INTO users VALUES('noowah', 'noowah', '0', 'Á¶ÇÏ¿î', '¼­¿ï ÀºÆò±¸ ºÒ±¤·Î 16±æ 25-7 2Ãş', '01044460410');
+INSERT INTO users VALUES('paparo2', 'papa', '0', '±èÇÑ³ª', '°æ±âµµ »ïÆòµ¿ µ¿ÆÇ±³·Î 212', '01066000028');
 
 
 INSERT INTO cart VALUES(cart_SEQ.NEXTVAL, 'noowah', 1);
