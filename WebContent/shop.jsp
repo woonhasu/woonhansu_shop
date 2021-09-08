@@ -25,7 +25,7 @@
 					<h3>${product.name}</h3>
 					<p>${product.price}</p>
 					<div class="btn">
-						<a href="#">장바구니 담기</a>
+						<a href="controller?command=addCart&idx=${product.idx}">장바구니 담기</a>
 						<a href="#">주문하기</a>
 					</div>
 				</div>

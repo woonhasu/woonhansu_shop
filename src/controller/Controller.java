@@ -27,12 +27,14 @@ public class Controller extends HttpServlet {
 			logout(request, response);
 		} else if(command.equals("getProductAll")) {
 			getProductAll(request, response);
-		} else if(command.equals("getCartAll")) {
-			getCartAll(request, response);
+		} else if(command.equals("getUserCartAll")) {
+			getUserCartAll(request, response);
 		} else if(command.equals("addOrder")) {
 			//아직 없다!!
 		} else if(command.equals("deleteCart")) {
 			deleteCart(request, response);
+		} else if(command.equals("addCart")) {
+			addCart(request, response);
 		}
 	}
 	
@@ -91,9 +93,9 @@ public class Controller extends HttpServlet {
 			request.getSession().removeAttribute("user");
 			request.getSession().invalidate();
 			getProductAll(request, response);
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch (Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -104,36 +106,42 @@ public class Controller extends HttpServlet {
 			ArrayList<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			url = "shop.jsp";
-		} catch (Exception s) {
-			s.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
 	// 전체 장바구니조회 (유저 장바구니 조회로 바꿔야 함)
-	public void getCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getUserCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
-			request.setAttribute("cartAll", service.getCartAll());
+			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+			System.out.println(user);
+			request.setAttribute("cartAll", service.getUserCartAll(user));
 			url = "cart.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch (Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
-	// 장바구니 추가 (미완)
-	public void insertCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 장바구니 추가 (완)
+	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		try {
 			Long idx = (long)Integer.parseInt(request.getParameter("idx"));
-			ProductDTO.Get product = service.getProductByIdx(idx);
-//			request.setAttribute("insertCart", service.insertCart(request.getSession().getAttribute("user"), product);
-			url = "cart.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+			if(user != null) {
+				service.addCart(user.getId(), idx);
+				getUserCartAll(request, response);				
+			} else {
+				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+			}
+		} catch (Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);	
 	}
@@ -143,11 +151,11 @@ public class Controller extends HttpServlet {
 		String url = "showError.jsp";
 		try {
 			Long idx = (long)Integer.parseInt(request.getParameter("idx"));
-			request.setAttribute("deleteCart", service.deleteCart(idx));
-			url = "cart.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+			service.deleteCart(idx);
+			getUserCartAll(request, response);
+		} catch (Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

@@ -11,12 +11,9 @@ public class CartDTO {
 	@Data
 	@AllArgsConstructor
 	public static class Get {
+		private Long idx;
 		private Users users;
 		private Product product;
     }
-	
-	@Data
-	public static class Delete {
-		private Long idx;
-    }
+
 }
