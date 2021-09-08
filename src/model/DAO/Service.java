@@ -229,25 +229,23 @@ public class Service {
 	
 	
 		// Car CRUD
-		public static List<CartDTO.Get> getCartAll() {
-			return cartDAO.getCartAll();
+		public static List<CartDTO.Get> getUserCartAll(UsersDTO.Get user) throws NotExistException {
+			List<CartDTO.Get> cart = cartDAO.getUserCartAll(user);
+			if(cart == null) {
+				throw new NotExistException("장바구니가 비어있습니다");
+			} else {
+				return cart;
+			}
 		}
 		
-		public static boolean insertCart(Users user, Product product) {
-			return cartDAO.insertCart(user, product);
+		public static boolean addCart(String userId, Long productIdx) {
+			return cartDAO.addCart(userId, productIdx);
 		}
 		
 		public static boolean deleteCart(Long idx) {
 			return cartDAO.deleteCart(idx);
 		}
-		
-		public static void main(String[] args) {
-			List<CartDTO.Get> a = getCartAll();
-			a.forEach(v -> {
-				System.out.println(v.getProduct());
-			});
-		}
-		
+				
 		// idx 로 product 가져오기
 		public ProductDTO.Get getProductByIdx(Long idx) {
 			return productDAO.getProductByIdx(idx);

@@ -9,7 +9,6 @@
 
 
 
-
 		<properties>
 
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
