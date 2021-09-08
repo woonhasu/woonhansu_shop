@@ -48,8 +48,8 @@ public class ProductDAO {
 		ArrayList<ProductDTO.Get> nAll = null;
 		
 		try {
-			Query query = em.createNativeQuery("SELECT * FROM product WHERE product_name=?", Product.class);
-			query.setParameter(1, name);
+			Query query = em.createNativeQuery("SELECT * FROM product WHERE product_name LIKE ?||'%'", Product.class);
+			query.setParameter(1, name.substring(0,2));
 			nAll = (ArrayList<ProductDTO.Get>)query.getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();

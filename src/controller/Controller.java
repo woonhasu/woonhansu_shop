@@ -43,6 +43,12 @@ public class Controller extends HttpServlet {
 			deleteUser(request, response);
 		} else if(command.equals("addCart")) {
 			addCart(request, response);
+		} else if(command.equals("getOrdersAll")) {
+			getOrdersAll(request, response);
+		} else if(command.equals("category")) {
+			getProductByCategory(request, response);
+		} else if(command.equals("search")) {
+			getProductByName(request, response);
 		} else if(command.equals("getUserOrdersAll")) {
 			getUserOrdersAll(request, response);
 		}
@@ -240,7 +246,7 @@ public class Controller extends HttpServlet {
 			boolean result = service.addUser(user);
 			if(result) {
 				request.getSession().setAttribute("user", user);
-				login(request, response);
+				url = "controller?command=login";
 			}else {
 				request.setAttribute("errorMsg", "회원 가입 실패");
 			}
@@ -291,7 +297,7 @@ public class Controller extends HttpServlet {
 			UsersDTO.Get user = (UsersDTO.Get) session.getAttribute("user");
 			boolean result = service.deleteUser(user.getId());
 			if(result) {
-				logout(request, response);
+				url = "controller?command=logout";
 			}else {
 				request.setAttribute("errorMsg", "삭제 실패");
 			}
@@ -308,10 +314,13 @@ public class Controller extends HttpServlet {
 	 */
 	public void getProductByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		String name = request.getParameter("name");
 		
 		try {
-			request.setAttribute("product", service.getProductByName(request.getParameter("productName")));
-			url = "product/productDetail.jsp";
+			ArrayList<ProductDTO.Get> all = service.getProductAll();
+			request.setAttribute("productAll", all);
+			request.setAttribute("productName", service.getProductByName(name));
+			url = "productName.jsp";
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			//e.printStackTrace();
@@ -324,16 +333,21 @@ public class Controller extends HttpServlet {
 	 */
 	public void getProductByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		String category = request.getParameter("category");
 		
+
 		try {
-			request.setAttribute("productCategory", service.getProductByCategory(request.getParameter("category")));
+			ArrayList<ProductDTO.Get> all = service.getProductAll();
+			request.setAttribute("productAll", all);
+			request.setAttribute("productCategory", service.getProductByCategory(category));
+			url = "productCategory.jsp";
 		}catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			//e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-	
+
 	
 	
 	
