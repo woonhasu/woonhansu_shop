@@ -1,14 +1,18 @@
 package model.DAO;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.Order;
 
 import model.DTO.OrdersDTO;
 import model.DTO.OrdersDTO.Get;
 import model.DTO.UsersDTO;
 import model.domain.Orders;
+import model.domain.Product;
+import model.domain.Users;
 import util.DBUtil;
 
 public class OrdersDAO {
@@ -40,7 +44,7 @@ public class OrdersDAO {
 
 		List<OrdersDTO.Get> all = null;
 		try {
-			all = (List<OrdersDTO.Get>) em.createNativeQuery("select * from orders where user_id =?", Orders.class).setParameter(1, user.getId()).getResultList();
+			all = (List<OrdersDTO.Get>) em.createNativeQuery("select * from orders where user_id =? order by 1", Orders.class).setParameter(1, user.getId()).getResultList();
 		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
@@ -63,6 +67,35 @@ public class OrdersDAO {
 			result = true;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
+		} finally {
+			em.close();
+			em = null;
+		}
+		return result;
+	}
+	
+	/** 주문 취소(주문 내역 삭제) >> 하운 추가! */
+	public static boolean addOrders(String userId, Long idx) throws SQLException {
+		EntityManager em = DBUtil.getEntityManager();
+		em.getTransaction().begin();
+		
+		boolean result = false;
+		Orders order = null;
+		
+		try {
+			order = new Orders();
+			order.setUsers(em.find(Users.class, userId));
+			order.setProduct(em.find(Product.class, idx));
+			order.setDate(new Date());
+			
+			em.persist(order);
+			em.getTransaction().commit();
+			
+			result = true;
+			System.out.println(order);
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;

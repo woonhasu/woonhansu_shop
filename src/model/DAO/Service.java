@@ -27,6 +27,7 @@ public class Service {
 	private static UsersDAO usersDAO = UsersDAO.getInstance();
 	private static ProductDAO productDAO = ProductDAO.getInstance();
 	private static CartDAO cartDAO = CartDAO.getInstance();
+	private static OrdersDAO ordersDAO = OrdersDAO.getInstance();
 	
 	
 	/** 회원가입 >> 지수
@@ -249,6 +250,20 @@ public class Service {
 				return user;
 			}
 		}
+		
+		//	주문 추가
+		public static boolean addOrdersFromCart(String userId, Long idx, Long cartIdx) throws SQLException {
+			boolean result = ordersDAO.addOrders(userId, idx);
+			if(result) {
+				cartDAO.deleteCart(cartIdx);
+			}
+			return result;
+		}
+		
+		//	주문 추가
+		public static boolean addOrders(String userId, Long idx) throws SQLException {
+			return ordersDAO.addOrders(userId, idx);
+		}
 	
 	
 	
@@ -398,7 +413,7 @@ public class Service {
 		
 		//	주문 조회
 		public static List<OrdersDTO.Get> getOrdersAll() throws SQLException, NotExistException {
-			List<OrdersDTO.Get> all = OrdersDAO.getOrdersAll();
+			List<OrdersDTO.Get> all = ordersDAO.getOrdersAll();
 			if(all == null) {
 				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
 			}
@@ -408,8 +423,8 @@ public class Service {
 			return all;
 		}
 		
-		public Object getUserOrdersAll(model.DTO.UsersDTO.Get user) throws NotExistException {
-			List<OrdersDTO.Get> all = OrdersDAO.getUserOrdersAll(user);
+		public Object getUserOrdersAll(UsersDTO.Get user) throws NotExistException {
+			List<OrdersDTO.Get> all = ordersDAO.getUserOrdersAll(user);
 			if(all == null) {
 				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
 			}
@@ -423,23 +438,25 @@ public class Service {
 		
 		//	주문 삭제
 		public static boolean deleteOrders(Long idx) throws SQLException {
-		return OrdersDAO.deleteOrders(idx);
+			return ordersDAO.deleteOrders(idx);
 		}
 		
 		// 확인 해봐야함. 
 		// 제품 추가
 		public static boolean addProduct(Create idx) throws SQLException {
-			return ProductDAO.addProduct(idx);
+			return productDAO.addProduct(idx);
 		}
 		
 		//제품 삭제
 		public static boolean deleteProduct(Long idx) throws SQLException {
-			return ProductDAO.deleteProduct(idx);
+			return productDAO.deleteProduct(idx);
 		}
 		
 		//제품 수정
 		public static boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
 			return productDAO.updateProduct(idx, newProduct);
 		}
+
+
 
 }
