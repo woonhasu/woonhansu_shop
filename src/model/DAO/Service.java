@@ -247,6 +247,20 @@ public class Service {
 				return user;
 			}
 		}
+		
+		//	주문 추가
+		public static boolean addOrdersFromCart(String userId, Long idx, Long cartIdx) throws SQLException {
+			boolean result = ordersDAO.addOrders(userId, idx);
+			if(result) {
+				cartDAO.deleteCart(cartIdx);
+			}
+			return result;
+		}
+		
+		//	주문 추가
+		public static boolean addOrders(String userId, Long idx) throws SQLException {
+			return ordersDAO.addOrders(userId, idx);
+		}
 	
 	
 	
@@ -407,7 +421,7 @@ public class Service {
 			}
 		}
 		
-		public Object getUserOrdersAll(model.DTO.UsersDTO.Get user) throws NotExistException {
+		public Object getUserOrdersAll(UsersDTO.Get user) throws NotExistException {
 			List<OrdersDTO.Get> all = ordersDAO.getUserOrdersAll(user);
 			if(all == null) {
 				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
@@ -441,5 +455,7 @@ public class Service {
 		public static boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
 			return productDAO.updateProduct(idx, newProduct);
 		}
+
+
 
 }

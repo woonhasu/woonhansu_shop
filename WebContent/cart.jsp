@@ -37,11 +37,13 @@
 						<td>${cart.product.price}</td>
 						<td>${cart.product.color}</td>
 						<td>${cart.product.psize}</td>
-						<td><a href="controller?command=addOrder">주문하기</a></td>
+						<td><a href="controller?command=addOrdersFromCart&idx=${cart.product.idx}&cart=${cart.idx}">주문하기</a></td>
 						<td><a href="controller?command=deleteCart&idx=${cart.idx}">삭제하기</a></td>
 					</tr>
 				</c:forEach>
 			</table>
+			<a href="#t&idx=${cart.idx}">전체 주문</a>
+
 		</div>
 	</c:if>
 

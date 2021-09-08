@@ -78,7 +78,6 @@ public class CartDAO {
 		} finally {
 			em.close();
 			em = null;
-			System.out.println(result);
 		}
 		return result;
 	}

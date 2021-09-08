@@ -31,8 +31,8 @@ public class Controller extends HttpServlet {
 			getProductAll(request, response);
 		} else if(command.equals("getUserCartAll")) {
 			getUserCartAll(request, response);
-		} else if(command.equals("addOrder")) {
-			//아직 없다!!
+		} else if(command.equals("addOrders")) {
+			addOrders(request, response);
 		} else if(command.equals("deleteCart")) {
 			deleteCart(request, response);
 		} else if(command.equals("register")) {
@@ -51,6 +51,10 @@ public class Controller extends HttpServlet {
 			getProductByName(request, response);
 		} else if(command.equals("getUserOrdersAll")) {
 			getUserOrdersAll(request, response);
+		} else if(command.equals("addOrdersFromCart")) {
+			addOrdersFromCart(request, response);
+		} else if(command.equals("addOrders")) {
+			addOrders(request, response);
 		} else if(command.equals("deleteOrders")) {
 			deleteOrders(request, response);
 		}
@@ -87,6 +91,40 @@ public class Controller extends HttpServlet {
 	
 	
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//	로그인
 	// 로그인 실패 메세지 출력 하도록 수정 필요ㅠ
@@ -307,7 +345,6 @@ public class Controller extends HttpServlet {
 			request.setAttribute("errorMsg", e.getMessage());
 		}
 		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
 	
 	
@@ -469,7 +506,45 @@ public class Controller extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);
 		}
 		
-		// 주문 삭제 (수정 중)
+		private void addOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String url = "showError.jsp";
+			try {
+				Long idx = Long.parseLong(request.getParameter("idx"));
+				UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+				
+				if(user != null) {
+					service.addOrders(user.getId(), idx);
+				} else {
+					request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+				}
+			} catch (Exception e) {
+				request.setAttribute("errorMsg", e.getMessage());
+				e.printStackTrace();
+			}
+			response.sendRedirect("controller?command=getUserOrdersAll");
+		}
+		
+		private void addOrdersFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String url = "showError.jsp";
+			try {
+				Long idx = Long.parseLong(request.getParameter("idx"));
+				UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+				
+				Long cartIdx = Long.parseLong(request.getParameter("cart"));
+				
+				if(user != null) {
+					service.addOrdersFromCart(user.getId(), idx, cartIdx);
+					getUserOrdersAll(request, response);		
+				} else {
+					request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+				}
+			} catch (Exception e) {
+				request.setAttribute("errorMsg", e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		
+		// 주문 삭제
 		public void deleteOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String url = "showError.jsp";
 			try {
@@ -483,21 +558,4 @@ public class Controller extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);
 		}
 		
-		// 제품 추가 (미완)
-//		public void insertCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//			String url = "showError.jsp";
-//			try {
-//				Long idx = (long)Integer.parseInt(request.getParameter("idx"));
-//				ProductDTO.Get product = service.getProductByIdx(idx);
-////				request.setAttribute("insertCart", service.insertCart(request.getSession().getAttribute("user"), product);
-//				url = "cart.jsp";
-//			} catch (Exception s) {
-//				request.setAttribute("errorMsg", s.getMessage());
-//				s.printStackTrace();
-//			}
-//			request.getRequestDispatcher(url).forward(request, response);	
-//		}
-		
-		
-	
 }
