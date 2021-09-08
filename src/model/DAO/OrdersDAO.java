@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import model.DTO.OrdersDTO;
+import model.DTO.OrdersDTO.Get;
+import model.DTO.UsersDTO;
 import model.domain.Orders;
 import util.DBUtil;
 
@@ -18,18 +20,33 @@ public class OrdersDAO {
 	}
 
 	/** 주문내역 조회 >> 한나 */
-	public static List<OrdersDTO> getOrdersAll() throws SQLException {
+	public static List<OrdersDTO.Get> getOrdersAll() throws SQLException {
 		EntityManager em = DBUtil.getEntityManager();
 
-		List<OrdersDTO> all = null;
+		List<OrdersDTO.Get> all = null;
 		try {
-			all = (List<OrdersDTO>) em.createNativeQuery("select * from Orders", Orders.class).getResultList();
+			all = (List<OrdersDTO.Get>) em.createNativeQuery("select * from Orders", Orders.class).getResultList();
+		} catch(Exception e){
+			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
 		}
-		
-		System.out.println("+++ " + all);
+		return all;
+	}
+	
+	public static List<Get> getUserOrdersAll(UsersDTO.Get user) {
+		EntityManager em = DBUtil.getEntityManager();
+
+		List<OrdersDTO.Get> all = null;
+		try {
+			all = (List<OrdersDTO.Get>) em.createNativeQuery("select * from orders where user_id =?", Orders.class).setParameter(1, user.getId()).getResultList();
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
 		return all;
 	}
 
@@ -52,4 +69,5 @@ public class OrdersDAO {
 		}
 		return result;
 	}
+
 }
