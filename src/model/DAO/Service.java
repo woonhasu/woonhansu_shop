@@ -396,22 +396,32 @@ public class Service {
 		
 		
 		
-		//주문 조회
-		public static List<OrdersDTO> getOrdersAll() throws SQLException {
-			List<OrdersDTO> all = OrdersDAO.getOrdersAll();
+		//	주문 조회
+		public static List<OrdersDTO.Get> getOrdersAll() throws SQLException, NotExistException {
+			List<OrdersDTO.Get> all = OrdersDAO.getOrdersAll();
 			if(all == null) {
-				System.out.println("주문 정보를 찾을 수 없습니다.");
-//				throw new NotExistException("제품 정보를 찾을 수 없습니다.");
+				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
 			}
 			if(all.size() == 0) {
-				System.out.println("주문 정보가 존재하지 않습니다.");
-//				throw new NotExistException("제품 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
+				throw new NotExistException("주문 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
+			}
+			return all;
+		}
+		
+		public Object getUserOrdersAll(model.DTO.UsersDTO.Get user) throws NotExistException {
+			List<OrdersDTO.Get> all = OrdersDAO.getUserOrdersAll(user);
+			if(all == null) {
+				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
+			}
+			if(all.size() == 0) {
+				throw new NotExistException("주문 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
 			}
 			return all;
 		}
 		
 		
-		//주문 삭제
+		
+		//	주문 삭제
 		public static boolean deleteOrders(Long idx) throws SQLException {
 		return OrdersDAO.deleteOrders(idx);
 		}
@@ -431,5 +441,5 @@ public class Service {
 		public static boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
 			return productDAO.updateProduct(idx, newProduct);
 		}
-		
+
 }

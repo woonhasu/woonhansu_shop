@@ -43,8 +43,8 @@ public class Controller extends HttpServlet {
 			deleteUser(request, response);
 		} else if(command.equals("addCart")) {
 			addCart(request, response);
-		} else if(command.equals("getOrdersAll")) {
-			getOrdersAll(request, response);
+		} else if(command.equals("getUserOrdersAll")) {
+			getUserOrdersAll(request, response);
 		}
 	}
 	
@@ -432,6 +432,20 @@ public class Controller extends HttpServlet {
 			String url = "showError.jsp";
 			try {
 				request.setAttribute("OrdersAll", service.getOrdersAll());
+				url = "orders.jsp";
+			} catch (Exception s) {
+				request.setAttribute("errorMsg", s.getMessage());
+				s.printStackTrace();
+			}
+			System.out.println("----------------");
+			request.getRequestDispatcher(url).forward(request, response);
+		}
+		
+		public void getUserOrdersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String url = "showError.jsp";
+			try {
+				UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+				request.setAttribute("OrdersAll", service.getUserOrdersAll(user));
 				url = "orders.jsp";
 			} catch (Exception s) {
 				request.setAttribute("errorMsg", s.getMessage());
