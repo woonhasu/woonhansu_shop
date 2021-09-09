@@ -19,7 +19,7 @@
 	<br><br><br>
 
 	<center>
-		<h3>${requestScope.errorMsg}</h3>
+		<h3>error : ${requestScope.errorMsg}</h3>
 			
 	</center>
 	

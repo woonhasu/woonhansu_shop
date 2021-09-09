@@ -9,6 +9,7 @@ import model.DTO.CartDTO;
 import model.DTO.OrdersDTO;
 import model.DTO.ProductDTO;
 import model.DTO.ProductDTO.Create;
+import model.DTO.ProductDTO.Get;
 import model.DTO.UsersDTO;
 
 public class Service {
@@ -72,7 +73,6 @@ public class Service {
 		if(all.size() == 0) {
 			throw new NotExistException("제품 정보가 존재하지 않습니다.");
 		}
-		
 		return all;
 	}
 	
@@ -262,6 +262,17 @@ public class Service {
 			return ordersDAO.addOrders(userId, idx);
 		}
 	
+		//	전체 장바구니 주문
+		public static boolean cartToOrdersAll(List<CartDTO.Get> cart) throws SQLException {
+			for(CartDTO.Get c : cart) {
+				if(ordersDAO.addOrders(c.getUsers().getId(), c.getProduct().getIdx())) {
+					cartDAO.deleteCart(c.getIdx());
+				} else {
+					return false;
+				}
+			}
+			return true;
+		}
 	
 	
 	
@@ -455,6 +466,13 @@ public class Service {
 		public static boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
 			return productDAO.updateProduct(idx, newProduct);
 		}
+
+		public List<String> getCategory(List<ProductDTO.Get> all) {
+			List<String> category = new ArrayList<String>();;
+			return category;
+		}
+
+	
 
 
 

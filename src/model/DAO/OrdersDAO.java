@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.Order;
 
+import model.DTO.CartDTO;
 import model.DTO.OrdersDTO;
 import model.DTO.OrdersDTO.Get;
 import model.DTO.UsersDTO;
