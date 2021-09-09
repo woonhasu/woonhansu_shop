@@ -16,7 +16,7 @@
 	<br>
 
 	<div class=userUpdate>
-		<form action="controller?command=userUpdate" method="post">
+		<form action="controller?command=updateUser" method="post">
 			<h3>Edit Profile</h3>
 			<br>
 			<thead>
