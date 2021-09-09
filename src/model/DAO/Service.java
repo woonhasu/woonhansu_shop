@@ -192,14 +192,14 @@ public class Service {
 	
 	//getUserOrdersAll
 	public List<OrdersDTO.Get> getUserOrdersAll(UsersDTO.Get user) throws NotExistException {
-		List<OrdersDTO.Get> all = ordersDAO.getUserOrdersAll(user);
-		if(all == null) {
-			throw new NotExistException("주문 정보를 찾을 수 없습니다.");
-		} else if(all.size() == 0) {
-			throw new NotExistException("주문 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
-		} else {
-			return all;
-		}
+		return ordersDAO.getUserOrdersAll(user);
+//		if(all == null) {
+//			throw new NotExistException("주문 정보를 찾을 수 없습니다.");
+//		} else if(all.size() == 0) {
+//			throw new NotExistException("주문 정보가 존재하지 않습니다.");		//이부분은 잘 모르겠음..
+//		} else {
+//			return all;
+//		}
 	}
 	
 	//updateOrders
