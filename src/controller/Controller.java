@@ -1,18 +1,14 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.DAO.Service;
-import model.DTO.CartDTO;
 import model.DTO.ProductDTO;
 import model.DTO.UsersDTO;
 
@@ -26,60 +22,57 @@ public class Controller extends HttpServlet {
 		String command = request.getParameter("command");
 		
 		//login,logout,register
-		if (command.equals("login")) {
+		if(command.equals("login")) {
 			login(request, response);
-		} else if (command.equals("logout")) {
+		} else if(command.equals("logout")) {
 			logout(request, response);
-		} else if (command.equals("register")) {
+		} else if(command.equals("register")) {
 			addUser(request, response);
 		
 		//userDAO
-		} else if (command.equals("getUsersList")) {
-			getUsersList(request, response);
-		} else if (command.equals("updateUser")) {
+		} else if(command.equals("getUsersAll")) {
+			getUsersAll(request, response);
+		} else if(command.equals("updateUser")) {
 			updateUser(request, response);
-		} else if (command.equals("deleteUser")) {
+		} else if(command.equals("deleteUser")) {
 			deleteUser(request, response);
 			
 		//productDAO
-		} else if (command.equals("addProduct")) {	
+		} else if(command.equals("addProduct")) {	
 			addProduct(request, response);
-		} else if (command.equals("getProductAll")) {
+		} else if(command.equals("getProductPage")) {
+			getProductPage(request,response);
+		} else if(command.equals("getProductAll")) {
 			getProductAll(request, response);
-		} else if (command.equals("getProductList")) { //user랑 admin 나누기 전 > 지수 수정
-			getProductList(request, response);
-			//-----------------------------
-		} else if (command.equals("category")) {
+		} else if(command.equals("category")) {
 			getProductByCategory(request, response);
-		} else if (command.equals("search")) {
+		} else if(command.equals("search")) {
 			getProductByName(request, response);
-		} else if (command.equals("updateProduct")) {
+		} else if(command.equals("updateProduct")) {
 			updateProduct(request, response);
-		} else if (command.equals("deleteProduct")) {
+		} else if(command.equals("deleteProduct")) {
 			deleteProduct(request, response);
 			
 		//cartDAO
-		} else if (command.equals("addCart")) {
+		} else if(command.equals("addCart")) {
 			addCart(request, response);
-		} else if (command.equals("getUserCartAll")) {
+		} else if(command.equals("getUserCartAll")) {
 			getUserCartAll(request, response);
-		} else if (command.equals("deleteCart")) {
+		} else if(command.equals("deleteCart")) {
 			deleteCart(request, response);
-		} else if (command.equals("cartToOrdersAll")) {  // 이따 같이 확인 
+		} else if(command.equals("cartToOrdersAll")) {  // 이따 같이 확인 
 			cartToOrdersAll(request, response);
 		
 		//ordersDAO
-		} else if (command.equals("addOrders")) {
+		} else if(command.equals("addOrders")) {
 			addOrders(request, response);
-		} else if (command.equals("addOrdersFromCart")) {
+		} else if(command.equals("addOrdersFromCart")) {
 			addOrdersFromCart(request, response);
-		} else if (command.equals("getOrdersList")) {  // admin user 구분해서 합치기
-			getOrdersList(request, response);
-		} else if (command.equals("getUserOrdersAll")) {
-			getUserOrdersAll(request, response);
-		} else if (command.equals("updateOrders")) {
+		} else if(command.equals("getOrdersAll")) {
+			getOrdersAll(request, response);
+		} else if(command.equals("updateOrders")) {
 			updateOrders(request, response);
-		} else if (command.equals("deleteOrders")) {
+		} else if(command.equals("deleteOrders")) {
 			deleteOrders(request, response);
 		} 
 		
@@ -92,6 +85,7 @@ public class Controller extends HttpServlet {
 	//login
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 
@@ -99,23 +93,26 @@ public class Controller extends HttpServlet {
 			UsersDTO.Get user = service.login(id, pw);
 			request.getSession().setAttribute("user", user);
 			url = "controller?command=getProductAll";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 	//logout
-	private void logout(HttpServletRequest request, HttpServletResponse response) {
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "showError.jsp";
+		
 		try {
 			request.getSession().removeAttribute("user");
 			request.getSession().invalidate();
-			getProductAll(request, response);
-		} catch (Exception e) {
+			url = "controller?command=getProductAll";
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
 		}
+		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
 	//register
@@ -128,42 +125,41 @@ public class Controller extends HttpServlet {
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
-
 		UsersDTO.Create user = new UsersDTO.Create(id, pw, admin, name, address, phone);
+
 		try {
 			boolean result = service.addUser(user);
-			if (result) {
+			if(result) {
 				request.getSession().setAttribute("user", user);
 				url = "controller?command=login";
 			} else {
 				request.setAttribute("errorMsg", "회원 가입 실패");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 	//getUsersList
-	public void getUsersList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getUsersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		
 		try {
 			request.setAttribute("UsersAll", service.getUsersAll());
 			url = "manageUsers.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
 	//updateUser
-	public void updateUser(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 
-		HttpSession session = request.getSession();
-		UsersDTO.Get user = (UsersDTO.Get) session.getAttribute("user");
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 		Integer admin = user.getAdmin();
 
 		String pw = request.getParameter("pw");
@@ -178,58 +174,56 @@ public class Controller extends HttpServlet {
 					request.getSession().setAttribute("user", service.getUser(user.getId()));
 					request.setAttribute("successMsg", "수정 성공");
 					url = "myPage.jsp";
-				}else {
+				} else {
 					request.setAttribute("errorMsg", "수정 실패");
 				}
-			}else if(admin == 1) {
+			} else if(admin == 1) {
 				String id = request.getParameter("id");
 				boolean result = service.updateUser(id, newUser);
 				if(result) {
 					url = "controller?command=getUsersList";
-				}else {
+				} else {
 					request.setAttribute("errorMsg", "수정 실패");
 				}
-			}else {
+			} else {
 				request.setAttribute("errorMsg", "계정 정보 에러, 로그인을 해주세요.");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			// e.printStackTrace();
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
 	//deleteUser
-	public void deleteUser(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
-		HttpSession session = request.getSession();
-		UsersDTO.Get user = (UsersDTO.Get) session.getAttribute("user");
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 		Integer admin = user.getAdmin();
-		
-		String id = (String)request.getParameter("id");
 		
 		try {
 			if(admin == 0) {
 				boolean result = service.deleteUser(user.getId());
 				if(result) {
 					url = "controller?command=logout";
-				}else {
+				} else {
 					request.setAttribute("errorMsg", "회원 탈퇴 실패");
 				}
-			}else if(admin == 1) {
+			} else if(admin == 1) {
+				String id = request.getParameter("id");
 				boolean result = service.deleteUser(id);
 				if(result) {
 					url = "controller?command=getUsersList";
-				}else {
+				} else {
 					request.setAttribute("errorMsg", "회원 삭제 실패");
 				}
-			}else {
+			} else {
 				request.setAttribute("errorMsg", "계정 정보 에러, 로그인을 해주세요.");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -243,47 +237,47 @@ public class Controller extends HttpServlet {
 		Integer price = Integer.parseInt(request.getParameter("price"));
 		String color = request.getParameter("color");
 		String psize = request.getParameter("psize");
-
 		ProductDTO.Create user = new ProductDTO.Create(category, name, price, color, psize);
 		
 		try {
 			boolean result = service.addProduct(user);
-			if (result) {
+			if(result) {
 				url = "controller?command=getProductList";
 			} else {
 				request.setAttribute("errorMsg", "제품 추가 실패");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+
+	//getProductPage
+	private void getProductPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "showError.jsp";
+
+		try {
+			request.setAttribute("productAll", service.getProductAll());
+			url = "shop.jsp";
+		} catch(Exception s) {
+			request.setAttribute("errorMsg", s.getMessage());
+			s.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 	//getProductAll
-	private void getProductAll(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void getProductAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
-		try {
-			List<ProductDTO.Get> all = service.getProductAll();
 
-			request.setAttribute("productAll", all);
-			url = "shop.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
-		}
-		request.getRequestDispatcher(url).forward(request, response);
-	}
-
-	//getProductList
-	private void getProductList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "showError.jsp";
 		try {
 			request.setAttribute("productAll", service.getProductAll());
 			url = "manageProduct.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -291,15 +285,15 @@ public class Controller extends HttpServlet {
 	//getProductByCategory
 	public void getProductByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "productCategory.jsp";
+		
 		String category = request.getParameter("category");
 		
 		try {
-			ArrayList<ProductDTO.Get> all = service.getProductAll();
-			request.setAttribute("productAll", all);
+			request.setAttribute("productAll", service.getProductAll());
 			request.setAttribute("productCategory", service.getProductByCategory(category));
-		}catch(Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			// e.printStackTrace();
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -307,15 +301,15 @@ public class Controller extends HttpServlet {
 	//getProductByName
 	public void getProductByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "productName.jsp";
+		
 		String name = request.getParameter("name");
 
 		try {
-			ArrayList<ProductDTO.Get> all = service.getProductAll();
-			request.setAttribute("productAll", all);
+			request.setAttribute("productAll", service.getProductAll());
 			request.setAttribute("productName", service.getProductByName(name));
-		}catch(Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			// e.printStackTrace();
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -324,26 +318,25 @@ public class Controller extends HttpServlet {
 	public void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 
+		Long idx = Long.parseLong(request.getParameter("idx"));
 		String category = request.getParameter("category");
 		String name = request.getParameter("name");
 		Integer price = Integer.parseInt(request.getParameter("price"));
 		String color = request.getParameter("color");
-		String psize = request.getParameter("psize");
-		
-		Long idx = Long.parseLong(request.getParameter("idx"));
+		String psize = request.getParameter("psize");		
 
 		ProductDTO.Update newProduct = new ProductDTO.Update(category, name, price, color, psize);
 
 		try {
 			boolean result = service.updateProduct(idx, newProduct);
-			if (result) {
+			if(result) {
 				url = "controller?command=getProductList";
 			} else {
 				request.setAttribute("errorMsg", "수정 실패");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			// e.printStackTrace();
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -351,6 +344,7 @@ public class Controller extends HttpServlet {
 	//deleteProduct
 	public void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		
 		Long idx = Long.parseLong(request.getParameter("idx"));
 
 		try {
@@ -360,9 +354,9 @@ public class Controller extends HttpServlet {
 			} else {
 				request.setAttribute("errorMsg", "제품 삭제 실패");
 			}
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -370,16 +364,23 @@ public class Controller extends HttpServlet {
 	//addCart
 	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+
+		Long idx = Long.parseLong(request.getParameter("idx"));
+		
 		try {
-			Long idx = (long) Integer.parseInt(request.getParameter("idx"));
-			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 			if (user != null) {
-				service.addCart(user.getId(), idx);
-				getUserCartAll(request, response);
+				boolean result = service.addCart(user.getId(), idx);
+				if(result) {
+					url = "controller?command=getUserCartAll";					
+				} else {
+					request.setAttribute("errorMsg", "장바구니 추가 실패");
+				}
 			} else {
-				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다.");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
 		}
@@ -390,11 +391,11 @@ public class Controller extends HttpServlet {
 	public void getUserCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "cart.jsp";
 
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+
 		try {
-			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
-			System.out.println(user);
 			request.setAttribute("cartAll", service.getUserCartAll(user));
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
 		}
@@ -402,14 +403,19 @@ public class Controller extends HttpServlet {
 	}
 
 	// deleteCart
-	public void deleteCart(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
+		
+		Long idx = Long.parseLong(request.getParameter("idx"));
+
 		try {
-			Long idx = (long) Integer.parseInt(request.getParameter("idx"));
-			service.deleteCart(idx);
-			getUserCartAll(request, response);
-		} catch (Exception e) {
+			boolean result = service.deleteCart(idx);
+			if(result) {
+				url = "controller?command=getUserCartAll";
+			} else {
+				request.setAttribute("errorMsg", "장바구니 삭제 실패");
+			}
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
 		}
@@ -417,85 +423,98 @@ public class Controller extends HttpServlet {
 	}
 	
 	//cartToOrdersAll
-	private void cartToOrdersAll(HttpServletRequest request, HttpServletResponse response) {
+	private void cartToOrdersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
-		try {
-			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
-			List<CartDTO.Get> cart = service.getUserCartAll(user);
-			service.cartToOrdersAll(cart);
-			getUserCartAll(request, response);
-		} catch (Exception e) {
-			request.setAttribute("errorMsg", e.getMessage());
-			e.printStackTrace();
-		}
-	}
+		
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 
-	//addOrders
-	private void addOrders(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String url = "showError.jsp";
 		try {
-			Long idx = Long.parseLong(request.getParameter("idx"));
-			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
-
-			if (user != null) {
-				service.addOrders(user.getId(), idx);
+			boolean result = service.cartToOrdersAll(service.getUserCartAll(user));
+			if(result) {
+				url = "controller?command=getUserCartAll";
 			} else {
-				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+				request.setAttribute("errorMsg", "전체 주문 실패");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
-		}
-		response.sendRedirect("controller?command=getUserOrdersAll");
-	}
-
-	//addOrdersFromCart
-	private void addOrdersFromCart(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String url = "showError.jsp";
-		try {
-			Long idx = Long.parseLong(request.getParameter("idx"));
-			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
-
-			Long cartIdx = Long.parseLong(request.getParameter("cart"));
-
-			if (user != null) {
-				service.addOrdersFromCart(user.getId(), idx, cartIdx);
-				getUserOrdersAll(request, response);
-			} else {
-				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
-			}
-		} catch (Exception e) {
-			request.setAttribute("errorMsg", e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	//getOrdersList
-	public void getOrdersList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "showError.jsp";
-		try {
-			request.setAttribute("OrdersAll", service.getOrdersAll());
-			url = "manageOrders.jsp";
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-	
-	//getUserOrdersAll
-	public void getUserOrdersAll(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String url = "orders.jsp";
+
+	//addOrders
+	private void addOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "showError.jsp";
+
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+		
+		Long idx = Long.parseLong(request.getParameter("idx"));
 		
 		try {
-			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
-			request.setAttribute("OrdersAll", service.getUserOrdersAll(user));
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+			if(user != null) {
+				boolean result = service.addOrders(user.getId(), idx);
+				if(result) {
+					url = "controller?command=getUserOrdersAll";
+				} else {
+					request.setAttribute("errorMsg", "주문 추가 실패");
+				}
+			} else {
+				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다.");
+			}
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+	//addOrdersFromCart
+	private void addOrdersFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "showError.jsp";
+		
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+		
+		Long idx = Long.parseLong(request.getParameter("idx"));
+		Long cartIdx = Long.parseLong(request.getParameter("cart"));
+		
+		try {
+			if (user != null) {
+				boolean result = service.addOrdersFromCart(user.getId(), idx, cartIdx);
+				if(result) {
+					url = "controller?command=getUserOrdersAll";
+				} else {
+					request.setAttribute("errorMsg", "주문 추가 실패");
+				}
+			} else {
+				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+			}
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+	//getOrdersList
+	public void getOrdersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "showError.jsp";
+		
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
+		Integer admin = user.getAdmin();
+		
+		try {
+			if(admin == 0) {
+				request.setAttribute("OrdersAll", service.getUserOrdersAll(user));
+				url = "orders.jsp";
+			} else if(admin == 1) {
+				request.setAttribute("OrdersAll", service.getOrdersAll());
+				url = "manageOrders.jsp";
+			} else {
+				request.setAttribute("errorMsg", "계정 정보 에러, 로그인을 해주세요.");
+			}
+		} catch(Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -516,7 +535,7 @@ public class Controller extends HttpServlet {
 			}
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
-			// e.printStackTrace();
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -525,8 +544,7 @@ public class Controller extends HttpServlet {
 	public void deleteOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 
-		HttpSession session = request.getSession();
-		UsersDTO.Get user = (UsersDTO.Get) session.getAttribute("user");
+		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 		Integer admin = user.getAdmin();
 		
 		Long idx = Long.parseLong(request.getParameter("idx"));
@@ -549,10 +567,9 @@ public class Controller extends HttpServlet {
 			}else {
 				request.setAttribute("errorMsg", "계정 정보 에러, 로그인을 해주세요.");
 			}
-			
-		} catch (Exception s) {
-			request.setAttribute("errorMsg", s.getMessage());
-			s.printStackTrace();
+		} catch (Exception e) {
+			request.setAttribute("errorMsg", e.getMessage());
+			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

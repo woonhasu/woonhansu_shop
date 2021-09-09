@@ -53,6 +53,10 @@ public class UsersDAO {
 		
 		try {
 			check = em.find(Users.class, userId);
+			
+			if(check.getId().equals(userId) && check.getPw().equals(pw)) {
+				user = getUser(userId);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -60,9 +64,7 @@ public class UsersDAO {
 			em = null;
 		}
 		
-		if(check.getId().equals(userId) && check.getPw().equals(pw)) {
-			user = getUser(userId);
-		}
+		
 		return user;
 	}
 	
