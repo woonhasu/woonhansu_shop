@@ -6,21 +6,31 @@
 <link rel="shortcut icon" type="image/x-icon" href="https://bit.ly/38MHrcB">
 <link rel="stylesheet" href="css/style.css"/>
 <style type="text/css">
-	*{
-		overflow: hidden;
+	* {
+	}
+	
+	canvas {
+		position: absolute;
+		border: 1px solid black;
+		background: linear-gradient(#0477BF, #ffafbd);
 	}
 </style>
 </head>
 
 <body>
+    <canvas></canvas>	
 
 	<div id="home">
 		<div class="textBox">
 			<h2 class="title">welcome to woonhasu</h2>
 			<!-- <div class="button"><a href="shop.jsp">쇼핑하러가기</a></div> -->
 			<div class="button"><a href="controller?command=getProductAll">쇼핑하러가기</a></div>
+
 		</div>
 	</div>
+	
+	
+    <script src="canvas.js"></script>
 
 </body>
 </html>
