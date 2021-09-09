@@ -12,21 +12,17 @@ import util.DBUtil;
 public class UsersDAO {
 	
 	private static UsersDAO instance = new UsersDAO();
-	
 	private UsersDAO() {}
-	
 	public static UsersDAO getInstance() {
 		return instance;
 	}
 	
-	/** 회원가입 >> 지수
-	 * 
-	 */
+	//회원가입 >> 지수
 	public boolean addUser(UsersDTO.Create user) {
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		boolean result = false;
 		
+		boolean result = false;
 		tx.begin();
 		
 		try {
@@ -34,11 +30,10 @@ public class UsersDAO {
 			
 			tx.commit();
 			result = true;
-			
-		}catch(Exception e) {
+		} catch(Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			em.close();
 			em = null;
 		}
@@ -47,53 +42,48 @@ public class UsersDAO {
 
 	public UsersDTO.Get login(String userId, String pw) {
 		EntityManager em = DBUtil.getEntityManager();
-		Users check = null;
 		
+		Users check = null;
 		UsersDTO.Get user = null;
 		
 		try {
 			check = em.find(Users.class, userId);
-		}catch(Exception e) {
+			if(check.getId().equals(userId) && check.getPw().equals(pw)) {
+				user = getUser(userId);
+			}
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			em.close();
 			em = null;
-		}
-		
-		if(check.getId().equals(userId) && check.getPw().equals(pw)) {
-			user = getUser(userId);
 		}
 		return user;
 	}
 	
-	/** 회원 정보 단일 조회 >> 지수
-	 * 
-	 */
+	//회원 정보 단일 조회
 	public UsersDTO.Get getUser(String userId) {
 		EntityManager em = DBUtil.getEntityManager();
+		
 		UsersDTO.Get user = null;
 		
 		try {
 			Users u = em.find(Users.class, userId);
 			user = new UsersDTO.Get(u.getId(), u.getPw(), u.getAdmin(), u.getName(), u.getAddress(), u.getPhone());
-		}catch(Exception e) {
-			//e.printStackTrace();
-		}finally {
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
 			em.close();
 			em = null;
 		}
-		
 		return user;
 	}  
 	
-	/** 회원 정보 수정 ** request, update 나눠서  >> 지수
-	 * 
-	 */
+	//회원 정보 수정 
 	public boolean updateUser(String userId, UsersDTO.Update newUser) {
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		boolean result = false;
 		
+		boolean result = false;
 		tx.begin();
 		
 		try {
@@ -107,23 +97,21 @@ public class UsersDAO {
 				tx.commit();
 				result = true;
 			}
-		
-		}catch(Exception e) {
+		} catch(Exception e) {
 			tx.rollback();
-		}finally {
+			e.printStackTrace();
+		} finally {
 			em.close();
 			em = null;
 		}
-		
 		return result;
 	}
 	
-	/** 회원 탈퇴 >> 지수
-	 * 
-	 */
+	//회원 탈퇴
 	public boolean deleteUser(String userId) {
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
+		
 		boolean result = false;
 		tx.begin();
 		
@@ -135,34 +123,30 @@ public class UsersDAO {
 				tx.commit();
 				result = true;
 			}
-			
-		}catch(Exception e) {
+		} catch(Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			em.close();
 			em = null;
 		}
-		
 		return result;
 	}
 	
-	/** 회원 정보 다중 조회 >> 지수
-	 * 
-	 */
+	//회원 정보 다중 조회 
 	public ArrayList<UsersDTO.Get> getUsersAll() {
 		EntityManager em =  DBUtil.getEntityManager();
+		
 		ArrayList<UsersDTO.Get> all = null;
 		
 		try {
 			all = (ArrayList<UsersDTO.Get>)em.createNativeQuery("SELECT * FROM users", Users.class).getResultList();
 		} catch(Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
 		}
-		
 		return all;
 	}
 }
