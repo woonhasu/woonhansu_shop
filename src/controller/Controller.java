@@ -129,14 +129,13 @@ public class Controller extends HttpServlet {
 	}
 
 	// 전체 장바구니조회 (유저 장바구니 조회로 바꿔야 함)
-	public void getUserCartAll(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String url = "showError.jsp";
+	public void getUserCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String url = "cart.jsp";
+		
 		try {
 			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 			System.out.println(user);
 			request.setAttribute("cartAll", service.getUserCartAll(user));
-			url = "cart.jsp";
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
@@ -479,7 +478,6 @@ public class Controller extends HttpServlet {
 	
 	/**
 	 * 주문 수정 
-	 *
 	 */
 	public void updateOrders(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
@@ -507,11 +505,11 @@ public class Controller extends HttpServlet {
 
 	public void getUserOrdersAll(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "showError.jsp";
+		String url = "orders.jsp";
+		
 		try {
 			UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 			request.setAttribute("OrdersAll", service.getUserOrdersAll(user));
-			url = "orders.jsp";
 		} catch (Exception s) {
 			request.setAttribute("errorMsg", s.getMessage());
 			s.printStackTrace();

@@ -14,12 +14,13 @@
 	
 	<jsp:include page="common/headerNav.jsp"/>
 	
-	<h2>Manage Orders</h2>
+	<div class="totalList">
+	<br>
+	<h3>Manage Orders</h3>
 	<br>
 
-	<div id="manageOrders">
-
-		<table border="1">
+		<div class="list">
+		<table>
 			<tr>
 				<th>구매 번호</th>
 				<th>구매자 아이디</th>
@@ -40,6 +41,7 @@
 				</form>
 			</c:forEach>
 		</table>
+		</div>
 	</div>
 
 </body>

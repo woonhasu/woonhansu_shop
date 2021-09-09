@@ -39,7 +39,7 @@ a {
 .navLinks {
 	display: flex;
 	justify-content: flex-end;
-	width: 30%;
+	width: 80%;
 	list-style: none;
 }
 
@@ -261,7 +261,24 @@ input:-webkit-autofill:active
 	cursor: pointer;
 }
 
+/* totalList */
+.totalList {
+	position: relative;
+	margin: auto;
+	width: 80%;
+}
 
+.list table {
+	margin-top: 20px;
+	border: none;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.list table tr {
+	border-bottom: 1px solid black;
+	text-align: left;
+}
 
 
 

@@ -14,12 +14,13 @@
 	
 	<jsp:include page="common/headerNav.jsp"/>
 	
-	<h2>Manage Product</h2>
+	<div class="totalList">
 	<br>
-
-	<div id="manageProduct">
+	<h3>Manage Product</h3>
+	<br>
 		
-		<table border="1">
+		<div class="list">
+		<table>
 			<tr>
 				<th>상품 번호</th>
 				<th>카테고리</th>
@@ -45,6 +46,7 @@
 			</c:forEach>
 		</table>
 		<a href="addProduct.jsp">제품 추가</a>
+		</div>
 	</div>
 
 </body>
