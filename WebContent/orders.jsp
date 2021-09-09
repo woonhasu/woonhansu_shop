@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +11,11 @@
 </head>
 <body>
 	<jsp:include page="common/headerNav.jsp" />
-	<br>
-	<br>
 	
+	<br>
+	<br>
 	
 	<div class="totalList">
-	
 	<h3>${sessionScope.user.name} 님의 주문내역 입니다.</h3>
 	
 		<c:if test="${empty requestScope.OrdersAll }">
@@ -26,7 +24,6 @@
 	
 		<c:if test="${not empty requestScope.OrdersAll }">
 			<div class="list">
-	
 				<table>
 					<tr>
 						<th>구매 번호</th>
@@ -44,11 +41,8 @@
 						</tr>
 					</c:forEach>
 				</table>
-				
 			</div>
 		</c:if>
-		
 	</div>
-
 </body>
 </html>

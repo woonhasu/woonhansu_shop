@@ -1,8 +1,6 @@
-<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,23 +21,19 @@
 			<input type="submit" value="검색">
 		</form>
 		<div class="category">
-			<a href="controller?command=getProductAll">All</a> <a
-				href="controller?command=category&category=outer">Outer</a> <a
-				href="controller?command=category&category=top">Top</a> <a
-				href="controller?command=category&category=bottom">Bottom</a> <a
-				href="controller?command=category&category=setup">Setup</a> <a
-				href="controller?command=category&category=bag">Bag</a>
+			<a href="controller?command=getProductAll">All</a> 
+			<a href="controller?command=category&category=outer">Outer</a> 
+			<a href="controller?command=category&category=top">Top</a>
+			<a href="controller?command=category&category=bottom">Bottom</a>
+			<a href="controller?command=category&category=setup">Setup</a>
+			<a href="controller?command=category&category=bag">Bag</a>
 		</div>
 	</div>
 	
 	<br>
-	
-	
 	<br>
 
-
 	<div id="shopList">
-
 		<c:forEach items="${requestScope.productAll}" var="product">
 			<div class="product">
 				<img class="product" alt="img" src="images/${product.idx}.jpg">
@@ -53,7 +47,6 @@
 				</div>
 			</div>
 		</c:forEach>
-
 	</div>
 
 </body>
