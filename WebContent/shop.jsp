@@ -15,20 +15,7 @@
 
 	<br>
 	
-	<div class="search">
-		<form action="controller?command=search" method="post">
-			<input type="text" name="name" required>
-			<input type="submit" value="검색">
-		</form>
-		<div class="category">
-			<a href="controller?command=getProductAll">All</a> 
-			<a href="controller?command=category&category=outer">Outer</a> 
-			<a href="controller?command=category&category=top">Top</a>
-			<a href="controller?command=category&category=bottom">Bottom</a>
-			<a href="controller?command=category&category=setup">Setup</a>
-			<a href="controller?command=category&category=bag">Bag</a>
-		</div>
-	</div>
+	<jsp:include page="common/searchBar.jsp" />
 	
 	<br>
 	<br>

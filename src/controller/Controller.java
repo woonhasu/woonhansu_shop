@@ -92,7 +92,7 @@ public class Controller extends HttpServlet {
 		try {
 			UsersDTO.Get user = service.login(id, pw);
 			request.getSession().setAttribute("user", user);
-			url = "controller?command=getProductAll";
+			url = "controller?command=getProductPage";
 		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class Controller extends HttpServlet {
 		try {
 			request.getSession().removeAttribute("user");
 			request.getSession().invalidate();
-			url = "controller?command=getProductAll";
+			url = "controller?command=getProductPage";
 		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
@@ -454,7 +454,7 @@ public class Controller extends HttpServlet {
 			if(user != null) {
 				boolean result = service.addOrders(user.getId(), idx);
 				if(result) {
-					url = "controller?command=getUserOrdersAll";
+					url = "controller?command=getOrdersAll";
 				} else {
 					request.setAttribute("errorMsg", "주문 추가 실패");
 				}
@@ -478,15 +478,11 @@ public class Controller extends HttpServlet {
 		Long cartIdx = Long.parseLong(request.getParameter("cart"));
 		
 		try {
-			if (user != null) {
-				boolean result = service.addOrdersFromCart(user.getId(), idx, cartIdx);
-				if(result) {
-					url = "controller?command=getUserOrdersAll";
-				} else {
-					request.setAttribute("errorMsg", "주문 추가 실패");
-				}
+			boolean result = service.addOrdersFromCart(user.getId(), idx, cartIdx);
+			if(result) {
+				url = "controller?command=getOrdersAll";
 			} else {
-				request.setAttribute("errorMsg", "로그인을 먼저 부탁드립니다");
+				request.setAttribute("errorMsg", "주문 추가 실패");
 			}
 		} catch(Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
@@ -553,7 +549,7 @@ public class Controller extends HttpServlet {
 			if(admin == 0) {
 				boolean result = service.deleteOrders(idx);
 				if(result) {
-					url = "controller?command=getUserOrdersAll";
+					url = "controller?command=getOrdersAll";
 				}else {
 					request.setAttribute("errorMsg", "주문 삭제 실패");
 				}

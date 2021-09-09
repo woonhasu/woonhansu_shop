@@ -24,11 +24,12 @@ public class OrdersDAO {
 		return instance;
 	}
 
-	/** 주문내역 조회 >> 한나 */
+	//주문내역 조회
 	public static ArrayList<OrdersDTO.Get> getOrdersAll() throws SQLException {
 		EntityManager em = DBUtil.getEntityManager();
-
+		
 		ArrayList<OrdersDTO.Get> all = null;
+		
 		try {
 			all = (ArrayList<OrdersDTO.Get>) em.createNativeQuery("select * from Orders", Orders.class).getResultList();
 		} catch(Exception e){
@@ -42,8 +43,9 @@ public class OrdersDAO {
 	
 	public static List<Get> getUserOrdersAll(UsersDTO.Get user) {
 		EntityManager em = DBUtil.getEntityManager();
-
+		
 		List<OrdersDTO.Get> all = null;
+		
 		try {
 			all = (List<OrdersDTO.Get>) em.createNativeQuery("select * from orders where user_id =? order by 1", Orders.class).setParameter(1, user.getId()).getResultList();
 		} catch(Exception e){
@@ -55,9 +57,8 @@ public class OrdersDAO {
 		return all;
 	}
 
-	/** 주문 취소(주문 내역 삭제) >> 한나 */
+	//주문 취소(주문 내역 삭제)
 	public static boolean deleteOrders(Long idx) {
-		System.out.println(idx);
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
 		
@@ -71,18 +72,17 @@ public class OrdersDAO {
 			em.getTransaction().commit();
 
 			result = true;
-		} catch (Exception e) {
+		} catch(Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
-			System.out.println(result);
 		}
 		return result;
 	}
 	
-	/** 주문 취소(주문 내역 삭제) >> 하운 추가! */
+	//주문 취소(주문 내역 삭제)
 	public static boolean addOrders(String userId, Long idx) throws SQLException {
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
@@ -96,13 +96,11 @@ public class OrdersDAO {
 			order.setProduct(em.find(Product.class, idx));
 			order.setDate(new Date());
 			
-			
 			em.persist(order);
 			em.getTransaction().commit();
 			
 			result = true;
-			System.out.println(order);
-		} catch (Exception e) {
+		} catch(Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
@@ -112,14 +110,12 @@ public class OrdersDAO {
 		return result;
 	}
 	
-	/**
-	 * 주문 수정 
-	 */
+	//주문 수정
 	public boolean updateOrders(Long idx, Long productIdx) {
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		boolean result = false;
 		
+		boolean result = false;
 		tx.begin();
 		
 		try {
@@ -131,13 +127,13 @@ public class OrdersDAO {
 			}
 			tx.commit();
 			result = true;
-		}catch(Exception e) {
+		} catch(Exception e) {
 			tx.rollback();
-		}finally {
+			e.printStackTrace();
+		} finally {
 			em.close();
 			em = null;
 		}
 		return result;
 	}
-	
 }
