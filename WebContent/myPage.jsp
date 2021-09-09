@@ -33,7 +33,7 @@
 			<h3>전화번호 : ${sessionScope.user.phone}</h3>
 			<br> 
 			<div class="myPagebutton"><a href="updateUser.jsp">수정하기</a>
-			<a href="controller?command=userDelete">탈퇴하기</a></div>
+			<a href="controller?command=deleteUser">탈퇴하기</a></div>
 		</form>
 	</div>
 </body>
