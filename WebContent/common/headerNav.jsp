@@ -26,7 +26,7 @@
 					<%-- </c:if> --%>
 					
 					<!-- 이중 if문은 감지하지 못하는걸까...? -->
-					<c:if test="${sessionScope.user.admin}==0">
+					<c:if test="${sessionScope.user.admin}==1">
 						<!-- <li><a href="controller?command=logout">Sign Out</a></li>
 	        			<li><a href="myPage.jsp?">My Page</a></li> -->
 	        			<li><a href="ManageProduct.jsp">Manage Product</a></li>

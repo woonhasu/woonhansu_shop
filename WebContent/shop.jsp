@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="https://bit.ly/38MHrcB">
 <link rel="stylesheet" href="css/style.css">
+
 <title>shop.jsp</title>
 </head>
 <body>
@@ -21,25 +22,18 @@
 			<input type="text" name="name" required>
 			<input type="submit" value="검색">
 		</form>
+		<div class="category">
+			<a href="controller?command=getProductAll">All</a> <a
+				href="controller?command=category&category=outer">Outer</a> <a
+				href="controller?command=category&category=top">Top</a> <a
+				href="controller?command=category&category=bottom">Bottom</a> <a
+				href="controller?command=category&category=setup">Setup</a> <a
+				href="controller?command=category&category=bag">Bag</a>
+		</div>
 	</div>
 	
 	<br>
 	
-	<%-- <div class="category">
-		<a href="controller?command=getProductAll">전체 상품</a>
-		<c:forEach items="${requestScope.productAll}" var="product">
-			<a href="controller?command=category&category=${product.category}">${product.category}</a>
-		</c:forEach>
-	</div> --%>
-	
-	<div class="category">
-		<a href="controller?command=getProductAll">All</a>
-		<a href="controller?command=category&category=outer">Outer</a>
-		<a href="controller?command=category&category=top">Top</a>
-		<a href="controller?command=category&category=bottom">Bottom</a>	
-		<a href="controller?command=category&category=setup">Setup</a>	
-		<a href="controller?command=category&category=bag">Bag</a>	
-	</div>
 	
 	<br>
 

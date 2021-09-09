@@ -1,25 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon" href="https://bit.ly/38MHrcB">
 <link rel="stylesheet" href="css/style.css">
 <title>login.jsp</title>
 </head>
 <body>
 	<jsp:include page="common/headerNav.jsp"/>
-
 	<div class="login"> 
 		<form action="controller?command=register" method="post">
 			<h3>계정 유형을 선택하세요</h3>
-			<div>
-				<input class="inputBox" type="radio" name="admin" value="1">관리자
-			</div>
-			<div>
-				<input class="inputBox" type="radio" name="admin" value="0">일반 고객
+			<div class="adminRadio">
+				<div>
+					<input class="inputBox" type="radio" name="admin" value="1"> 관리자
+				</div>
+				<div>
+					<input class="inputBox" type="radio" name="admin" value="0"> 일반 회원
+				</div>
 			</div>
 		
 			<h3>아이디를 입력하세요</h3>

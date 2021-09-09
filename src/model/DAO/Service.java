@@ -432,7 +432,7 @@ public class Service {
 			}
 		}
 		
-		public Object getUserOrdersAll(UsersDTO.Get user) throws NotExistException {
+		public List<OrdersDTO.Get> getUserOrdersAll(UsersDTO.Get user) throws NotExistException {
 			List<OrdersDTO.Get> all = ordersDAO.getUserOrdersAll(user);
 			if(all == null) {
 				throw new NotExistException("주문 정보를 찾을 수 없습니다.");
