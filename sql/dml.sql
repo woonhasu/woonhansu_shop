@@ -1,5 +1,6 @@
-INSERT INTO product VALUES(product_SEQ.NEXTVAL, '상의', '캐시미어니트', 70000, 'grey', 'free');
-INSERT INTO product VALUES(product_SEQ.NEXTVAL, '하의', '조거팬츠', 38000, 'black', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'bottom', '코튼팬츠', 40000, 'beige', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'setup', '올블랙 셋업', 68000, 'black', 'free');
+INSERT INTO product VALUES(product_SEQ.NEXTVAL, 'top', '스트라이프 셔츠', 34000, 'blue', 'free');
 
 INSERT INTO users VALUES('admin', 'adminpw', '1', '관리자', '관리자집', '01012345678');
 INSERT INTO users VALUES('geesuee', 'jisu', '0', '배지수', '인천 중구 하늘별빛로 121', '01030576577');

@@ -24,20 +24,27 @@
 	
 	<br>
 	
-	<div class="category">
+	<%-- <div class="category">
 		<a href="controller?command=getProductAll">전체 상품</a>
 		<c:forEach items="${requestScope.productAll}" var="product">
 			<a href="controller?command=category&category=${product.category}">${product.category}</a>
 		</c:forEach>
+	</div> --%>
+	
+	<div class="category">
+		<a href="controller?command=getProductAll">All</a>
+		<a href="controller?command=category&category=outer">Outer</a>
+		<a href="controller?command=category&category=top">Top</a>
+		<a href="controller?command=category&category=bottom">Bottom</a>	
+		<a href="controller?command=category&category=setup">Setup</a>	
+		<a href="controller?command=category&category=bag">Bag</a>	
 	</div>
 	
 	<br>
 
 
 	<div id="shopList">
-		<!-- 여기서 getAll() 을 통한  -->
 
-		<!-- 여기다 제품들 출력 가능할듯!!! -->
 		<c:forEach items="${requestScope.productAll}" var="product">
 			<div class="product">
 				<img class="product" alt="img" src="images/${product.idx}.jpg">
@@ -50,7 +57,6 @@
 					</div>
 				</div>
 			</div>
-
 		</c:forEach>
 
 	</div>

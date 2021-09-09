@@ -29,7 +29,7 @@ CREATE TABLE product
 (
     product_idx     NUMBER           PRIMARY KEY,
     category		VARCHAR2(20)	 NOT NULL,
-    product_name    VARCHAR2(20)     NOT NULL, 
+    product_name    VARCHAR2(50)     NOT NULL, 
     price           NUMBER           NOT NULL, 
     color           VARCHAR2(20)     NULL, 
     psize           VARCHAR2(20)     NULL
