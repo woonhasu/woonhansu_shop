@@ -14,33 +14,30 @@
 			<h3>계정 유형을 선택하세요</h3>
 			<div class="adminRadio">
 				<div>
-					<input class="inputBox" type="radio" name="admin" value="1"> 관리자
+					<input type="radio" name="admin" value="1"> 관리자
 				</div>
 				<div>
-					<input class="inputBox" type="radio" name="admin" value="0"> 일반 회원
+					<input type="radio" name="admin" value="0"> 일반 회원
 				</div>
 			</div>
 		
 			<h3>아이디를 입력하세요</h3>
-			<input class="inputBox" type="text" name="id" required><br>
+			<input type="text" name="id" required><br>
 			
 			<h3>비밀번호를 입력하세요</h3>
-			<input class="inputBox" type="password" name="pw" required><br>
+			<input type="password" name="pw" required><br>
 			
 			<h3>이름</h3>
-			<input class="inputBox" type="text" name="name" required><br>
+			<input type="text" name="name" required><br>
 			
 			<h3>주소</h3>
-			<input class="inputBox" type="text" name="address" required><br>
+			<input type="text" name="address" required><br>
 			
 			<h3>연락처</h3>
-			<input class="inputBox" type="text" name="phone" required><br>
+			<input type="text" name="phone" required><br>
 			
 			<input class="register" type="submit" value="회원가입">
 		</form>
 	</div>
-	
-	<br><br><br>
-
 </body>
 </html>

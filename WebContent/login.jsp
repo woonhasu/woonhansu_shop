@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +17,6 @@
 			<input type="text" name="id" required><br>
 			<h3>비밀번호를 입력하세요</h3>
 			<input type="password" name="pw" required><br>
-	
 			<input class="submit" type="submit" value="로그인">
 			<input class="register" type="button" onclick="location.href='register.jsp'" value="회원가입">
 		</form>

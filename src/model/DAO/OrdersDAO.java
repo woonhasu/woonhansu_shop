@@ -96,6 +96,7 @@ public class OrdersDAO {
 			order.setProduct(em.find(Product.class, idx));
 			order.setDate(new Date());
 			
+			
 			em.persist(order);
 			em.getTransaction().commit();
 			

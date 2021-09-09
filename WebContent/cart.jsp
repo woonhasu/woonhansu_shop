@@ -14,16 +14,19 @@
 	<jsp:include page="common/headerNav.jsp" />
 	<br>
 	<br>
-	<h3>${sessionScope.user.name} 님의 장바구니입니다</h3>
+	
+	<div class="totalList">
+	
+	<h3>${sessionScope.user.name} 님의 장바구니입니다.</h3>
 	
 	<c:if test="${empty requestScope.cartAll}">
-		장바구니가 비어있습니다
+		<br>장바구니가 비어있습니다.
 	</c:if>
 
 	<c:if test="${not empty requestScope.cartAll}">
-		<div id="cartList">
+		<div class="list">
 
-			<table border="1">
+			<table>
 				<tr>
 					<th>상품코드</th>
 					<th>상품명</th>
@@ -47,6 +50,8 @@
 
 		</div>
 	</c:if>
+	
+	</div>
 
 </body>
 </html>

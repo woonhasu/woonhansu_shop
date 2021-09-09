@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +13,13 @@
 	
 	<jsp:include page="common/headerNav.jsp"/>
 	
-	<h2>Manage Users</h2>
+	<div class="totalList">
 	<br>
-	
-	<div id="manageUsers">
+		<h3>Manage Users</h3>
+		<br>
 
-		<table border="1">
+		<div class="list">
+		<table>
 			<tr>
 				<th>고객 아이디</th>
 				<th>고객 비밀번호</th>
@@ -44,6 +44,7 @@
 				</form>
 			</c:forEach>
 		</table>
+		</div>
 	</div>
 
 </body>
