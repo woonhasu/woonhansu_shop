@@ -11,9 +11,7 @@ INSERT INTO users VALUES('geesuee', 'jisu', '0', '배지수', '인천 중구 하
 INSERT INTO users VALUES('noowah', 'noowah', '0', '조하운', '서울 은평구 불광로 16길 25-7 2층', '01044460410');
 INSERT INTO users VALUES('paparo2', 'papa', '0', '김한나', '경기도 삼평동 동판교로 212', '01066000028');
 
-
 INSERT INTO cart VALUES(cart_SEQ.NEXTVAL, 'noowah', 1);
-
 INSERT INTO orders VALUES(orders_SEQ.NEXTVAL, 'noowah', 1, '2021-09-06');
 
 commit;
