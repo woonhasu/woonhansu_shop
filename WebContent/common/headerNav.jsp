@@ -31,7 +31,6 @@
 				<li><a href="controller?command=getUsersList">Users</a></li>
 
 			</c:if>
-
 		</ul>
 	</div>
 </nav>
