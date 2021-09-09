@@ -294,7 +294,7 @@ public class Controller extends HttpServlet {
 		String category = request.getParameter("category");
 		
 		try {
-			ArrayList<ProductDTO.Get> all = service.getProductAll();
+			List<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			request.setAttribute("productCategory", service.getProductByCategory(category));
 		}catch(Exception e) {
@@ -310,7 +310,7 @@ public class Controller extends HttpServlet {
 		String name = request.getParameter("name");
 
 		try {
-			ArrayList<ProductDTO.Get> all = service.getProductAll();
+			List<ProductDTO.Get> all = service.getProductAll();
 			request.setAttribute("productAll", all);
 			request.setAttribute("productName", service.getProductByName(name));
 		}catch(Exception e) {
