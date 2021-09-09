@@ -16,7 +16,7 @@
 	<h2>My Page</h2>
 	<br>
 	
-	<form action="controller?command=userUpdate" method="post">
+	<form action="controller?command=updateUser" method="post">
 <table border="1">
 	<thead>
 		<tr>

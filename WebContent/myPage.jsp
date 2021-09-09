@@ -11,8 +11,6 @@
 </head>
 <body>
 	
-	
-	
 	<jsp:include page="common/headerNav.jsp"/>
 	
 	<h2>My Page</h2>
@@ -33,7 +31,7 @@
 	
 	<a href="userUpdate.jsp">수정하기</a>
 
-	<a href="controller?command=userDelete">탈퇴하기</a>
+	<a href="controller?command=deleteUser&type=user">탈퇴하기</a>
 
 </body>
 </html>
