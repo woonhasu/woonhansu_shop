@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="shortcut icon" type="image/x-icon" href="https://bit.ly/38MHrcB">
 <link rel="stylesheet" href="css/style.css">
 <title>orders.jsp</title>
 </head>
