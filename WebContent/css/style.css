@@ -261,14 +261,139 @@ input:-webkit-autofill:active
 	cursor: pointer;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* myPage */
 .myPage {
 	display: flex;
 	justify-content: center;
 	padding-top: 10%;
-	max-height: 100vh;
+	max-height: 120vh;
 	position: relative;
-	text-align: left;
+	justify-content: center
 }
 
 .myPage h3 {
@@ -284,4 +409,67 @@ input:-webkit-autofill:active
 	border-radius: 20px;
 	padding: 30px;
 	align-content: center;
+}
+
+.myPage a {
+	margin: auto;
+	margin-top: 20px;
+	width: 150px;
+	border: 1px solid rgb(200, 200, 200);
+	border-radius: 30px;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+}
+
+/* myPagebutton */
+.myPagebutton {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* userUpdate */
+
+.userUpdate{
+	display: flex;
+	justify-content: center;
+	padding-top: 2%;
+	max-height: 300vh;
+	position: relative;
+	text-align: center;
+}
+
+.userUpdate h3 {
+	font-size: 2.4rem;
+	padding: 1px;
+}
+
+.userUpdate h2 {
+	font-size: 1.2rem;
+	padding: 2px;
+	font-family: sans-serif;
+}
+
+.userUpdate form {
+	position: relative;		/*po,dis 찾아보기*/
+	display: flex;
+	flex-direction: column;
+	width: 450px;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 30px;
+	align-content: center;
+}
+
+.userUpdate input {
+	margin: auto;
+	margin-top: 5px; background-color : rgb( 226, 226, 226, 0.5);
+	border-radius: 5px;
+	border: none;
+	border-bottom: 2px solid black;
+	width: 320px;
+	height: 32px;
+	background-color: rgb(226, 226, 226, 0.5);
+	align-content: center;
+	justify-content: center;
 }
