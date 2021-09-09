@@ -15,19 +15,17 @@ import util.DBUtil;
 public class CartDAO {
 	
 	private static CartDAO instance = new CartDAO();
-	
 	private CartDAO() {};
-	
 	public static CartDAO getInstance() {
 		return instance;
 	}
 	
-	
 	//	관리자 전체 장바구니 조회 (관리자)
-	public static List<CartDTO.Get> getCartAll(){
+	public static List<CartDTO.Get> getCartAll() {
 		EntityManager em = DBUtil.getEntityManager();
-		List<Cart> list = null;
 		
+		List<Cart> list = null;
+
 		ArrayList<CartDTO.Get> alist = new ArrayList<>();
 		
 		list = (List<Cart>) em.createNativeQuery("select * from cart", Cart.class).getResultList();
@@ -35,7 +33,6 @@ public class CartDAO {
 		list.forEach(v -> {
 			alist.add(new CartDTO.Get(v.getIdx(), v.getUsers(), v.getProduct()));
 		});
-			
 		return alist;
 	}
 	
@@ -43,7 +40,7 @@ public class CartDAO {
 	public static List<CartDTO.Get> getUserCartAll(UsersDTO.Get user){
 		EntityManager em = DBUtil.getEntityManager();
 		List<Cart> list = null;
-		
+
 		ArrayList<CartDTO.Get> alist = new ArrayList<>();
 		
 		list = (List<Cart>) em.createNativeQuery("select * from cart where user_id = ?", Cart.class).setParameter(1, user.getId()).getResultList();
@@ -71,7 +68,7 @@ public class CartDAO {
 			em.getTransaction().commit();
 			
 			result = true;
-		} catch (Exception e) {
+		} catch(Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
@@ -83,7 +80,6 @@ public class CartDAO {
 	
 	//	장바구니 내역 삭제
 	public static boolean deleteCart(Long cartIdx) {
-		System.out.println(cartIdx);
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
 		
@@ -97,15 +93,13 @@ public class CartDAO {
 			em.getTransaction().commit();
 			
 			result = true;
-		} catch (Exception e) {
+		} catch(Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
-			System.out.println(result);
 		}
 		return result;
 	}
-	
 }
