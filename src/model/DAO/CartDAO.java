@@ -51,7 +51,6 @@ public class CartDAO {
 		list.forEach(v -> {
 			alist.add(new CartDTO.Get(v.getIdx(), v.getUsers(), v.getProduct()));
 		});
-		
 		return alist;
 	}
 	

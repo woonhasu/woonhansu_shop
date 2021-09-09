@@ -42,7 +42,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<a href="#t&idx=${cart.idx}">전체 주문</a>
+			<a href="controller?command=cartToOrdersAll">전체 주문</a>
 
 		</div>
 	</c:if>
