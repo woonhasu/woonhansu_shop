@@ -2,6 +2,7 @@ package model.DAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,7 +21,7 @@ public class ProductDAO {
 	}
 	
 	//제품 다중(전체) 조회
-	public ArrayList<ProductDTO.Get> getProductAll() {
+	public List<ProductDTO.Get> getProductAll() {
 		EntityManager em =  DBUtil.getEntityManager();
 		
 		ArrayList<ProductDTO.Get> all = null;
@@ -37,7 +38,7 @@ public class ProductDAO {
 	}
 	
 	//제품 이름으로 다중 조회 
-	public ArrayList<ProductDTO.Get> getProductByName(String name) {
+	public List<ProductDTO.Get> getProductByName(String name) {
 		EntityManager em = DBUtil.getEntityManager();
 		
 		ArrayList<ProductDTO.Get> nAll = null;
@@ -56,7 +57,7 @@ public class ProductDAO {
 	}
 	
 	//제품 카테고리별로 조회
-	public ArrayList<ProductDTO.Get> getProductByCategory(String category) {
+	public List<ProductDTO.Get> getProductByCategory(String category) {
 		EntityManager em = DBUtil.getEntityManager();
 		
 		ArrayList<ProductDTO.Get> cAll = null;
