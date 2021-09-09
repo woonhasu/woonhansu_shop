@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="https://bit.ly/38MHrcB">
 <link rel="stylesheet" href="css/style.css">
 <title>orders.jsp</title>
@@ -36,7 +36,7 @@
 						<td>${orders.users.id}</td>
 						<td>${orders.product.idx}</td>
 						<td>${orders.date}</td>
-						<td><a href="controller?command=deleteOrders&ordersIdx=${orders.idx}">주문 취소</a></td>
+						<td><a href="controller?command=deleteOrders&idx=${orders.idx}">주문 취소</a></td>
 					</tr>
 				</c:forEach>
 			</table>

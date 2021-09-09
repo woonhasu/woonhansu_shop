@@ -13,7 +13,6 @@
 </head>
 <body>
 
-
 	<jsp:include page="common/headerNav.jsp" />
 	<div class="myPage">
 		<form>

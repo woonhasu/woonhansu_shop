@@ -1,13 +1,13 @@
 package model.DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.Order;
+import javax.persistence.EntityTransaction;
 
-import model.DTO.CartDTO;
 import model.DTO.OrdersDTO;
 import model.DTO.OrdersDTO.Get;
 import model.DTO.UsersDTO;
@@ -25,12 +25,12 @@ public class OrdersDAO {
 	}
 
 	/** 주문내역 조회 >> 한나 */
-	public static List<OrdersDTO.Get> getOrdersAll() throws SQLException {
+	public static ArrayList<OrdersDTO.Get> getOrdersAll() throws SQLException {
 		EntityManager em = DBUtil.getEntityManager();
 
-		List<OrdersDTO.Get> all = null;
+		ArrayList<OrdersDTO.Get> all = null;
 		try {
-			all = (List<OrdersDTO.Get>) em.createNativeQuery("select * from Orders", Orders.class).getResultList();
+			all = (ArrayList<OrdersDTO.Get>) em.createNativeQuery("select * from Orders", Orders.class).getResultList();
 		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
@@ -110,5 +110,33 @@ public class OrdersDAO {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * 주문 수정 
+	 */
+	public boolean updateOrders(Long idx, Long productIdx) {
+		EntityManager em = DBUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		boolean result = false;
+		
+		tx.begin();
+		
+		try {
+			Orders orders = em.find(Orders.class, idx);
+			Product newProduct = em.find(Product.class, productIdx);
+			
+			if(orders != null) {
+				orders.setProduct(newProduct);
+			}
+			tx.commit();
+			result = true;
+		}catch(Exception e) {
+			tx.rollback();
+		}finally {
+			em.close();
+			em = null;
+		}
+		return result;
+	}
+	
 }

@@ -146,7 +146,7 @@ public class ProductDAO {
 		return product;
 	}
 	
-	/** 제품 수정 ** request(?.?), update 나눠서(보류)
+	/** 제품 수정
 	 * 
 	 */
 	public boolean updateProduct(Long idx, ProductDTO.Update newProduct) {
@@ -160,10 +160,11 @@ public class ProductDAO {
 			Product product = em.find(Product.class, idx);
 			
 			if(product != null) {
-				product.setIdx(newProduct.getIdx());
+				product.setCategory(newProduct.getCategory());
 				product.setName(newProduct.getName());
 				product.setPrice(newProduct.getPrice());
 				product.setColor(newProduct.getColor());
+				product.setPsize(newProduct.getPsize());
 			}
 			tx.commit();
 			result = true;

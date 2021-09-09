@@ -1,5 +1,7 @@
 package model.DAO;
 
+import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -123,12 +125,10 @@ public class UsersDAO {
 		EntityManager em = DBUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		boolean result = false;
-		
 		tx.begin();
 		
 		try {
 			Users user = em.find(Users.class, userId);
-			
 			if(user != null) {
 				em.remove(user);
 
@@ -138,6 +138,7 @@ public class UsersDAO {
 			
 		}catch(Exception e) {
 			tx.rollback();
+			e.printStackTrace();
 		}finally {
 			em.close();
 			em = null;
@@ -145,5 +146,23 @@ public class UsersDAO {
 		
 		return result;
 	}
-
+	
+	/** 회원 정보 다중 조회 >> 지수
+	 * 
+	 */
+	public ArrayList<UsersDTO.Get> getUsersAll() {
+		EntityManager em =  DBUtil.getEntityManager();
+		ArrayList<UsersDTO.Get> all = null;
+		
+		try {
+			all = (ArrayList<UsersDTO.Get>)em.createNativeQuery("SELECT * FROM users", Users.class).getResultList();
+		} catch(Exception e) {
+			//e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
+		
+		return all;
+	}
 }

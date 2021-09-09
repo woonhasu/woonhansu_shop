@@ -2,10 +2,7 @@ package model.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import model.domain.Product;
 
 public class ProductDTO {
@@ -21,16 +18,18 @@ public class ProductDTO {
 		private String psize;
 		
 		public Product toEntity() {
-			return Product.builder().name(name).category(category).price(price).color(color).psize(psize).build();
+			return Product.builder().category(category).name(name).price(price).color(color).psize(psize).build();
 		}
     }
 	
 	@Data
+	@AllArgsConstructor
 	public static class Update {
-		private Long idx;
+		private String category;
 		private String name;
 		private Integer price;
 		private String color;
+		private String psize;
     }
 	
 	@Data
