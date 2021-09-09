@@ -54,14 +54,14 @@ CREATE TABLE users
 (
     id         VARCHAR2(20)     PRIMARY KEY,
     pw         VARCHAR2(20)     NOT NULL, 
-    admin	     NUMBER(1)		  	NOT NULL,
+    admin	     NUMBER(1)		NOT NULL,
     name       VARCHAR2(20)     NOT NULL, 
     address    VARCHAR2(300)    NOT NULL, 
     phone      VARCHAR2(20)     NOT NULL 
 );
 
 
-ALTER TABLE orders  ADD FOREIGN KEY (user_id) REFERENCES users(id);
-ALTER TABLE orders  ADD FOREIGN KEY (product_idx) REFERENCES product(product_idx);
-ALTER TABLE cart  ADD FOREIGN KEY (user_id) REFERENCES users(id);
-ALTER TABLE cart  ADD FOREIGN KEY (product_idx) REFERENCES product(product_idx);
+ALTER TABLE orders  ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+ALTER TABLE orders  ADD FOREIGN KEY (product_idx) REFERENCES product(product_idx) ON DELETE CASCADE;
+ALTER TABLE cart  ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+ALTER TABLE cart  ADD FOREIGN KEY (product_idx) REFERENCES product(product_idx) ON DELETE CASCADE;
