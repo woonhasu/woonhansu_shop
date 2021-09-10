@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.DAO.Service;
+import model.DTO.CartDTO;
 import model.DTO.ProductDTO;
 import model.DTO.UsersDTO;
 
@@ -367,11 +368,12 @@ public class Controller extends HttpServlet {
 		
 		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
 
-		Long idx = Long.parseLong(request.getParameter("idx"));
+		Long productIdx = Long.parseLong(request.getParameter("idx"));
+		CartDTO.Create cart = new CartDTO.Create(Long.parseLong(user.getId()), productIdx);
 		
 		try {
 			if (user != null) {
-				boolean result = service.addCart(user.getId(), idx);
+				boolean result = service.addCart(cart);
 				if(result) {
 					url = "controller?command=getUserCartAll";					
 				} else {
@@ -402,7 +404,7 @@ public class Controller extends HttpServlet {
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
-	// deleteCart
+	//deleteCart
 	public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		

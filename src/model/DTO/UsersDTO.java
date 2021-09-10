@@ -33,11 +33,6 @@ public class UsersDTO {
     }
 	
 	@Data
-	public static class Delete {
-		private String id;
-    }
-	
-	@Data
 	@AllArgsConstructor
 	public static class Get {
 		private String id;
@@ -52,18 +47,6 @@ public class UsersDTO {
 	public static class LogIn {
 		private String id;
 		private String pw;
-    }
-	
-	@Data
-	public static class Order {
-		private String id;
-		private List<Orders> orderList;
-    }
-	
-	@Data
-	public static class Cart {
-		private String id;
-		private List<Cart> cartList;
     }
 
 }

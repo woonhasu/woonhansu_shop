@@ -132,8 +132,8 @@ public class Service {
 	
 	//CartDAO
 	//addCart
-	public boolean addCart(String userId, Long productIdx) throws SQLException {
-		return cartDAO.addCart(userId, productIdx);
+	public boolean addCart(CartDTO.Create cart) throws SQLException {
+		return cartDAO.addCart(cart);
 	}
 	
 	//getUserCartAll

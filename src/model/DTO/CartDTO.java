@@ -10,6 +10,13 @@ public class CartDTO {
 	
 	@Data
 	@AllArgsConstructor
+	public static class Create {
+		private Long userIdx;
+		private Long productIdx;
+	}
+	
+	@Data
+	@AllArgsConstructor
 	public static class Get {
 		private Long idx;
 		private Users users;

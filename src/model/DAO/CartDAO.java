@@ -52,19 +52,19 @@ public class CartDAO {
 	}
 	
 	// 장바구니 내역 추가
-	public static boolean addCart(String userId, Long productIdx) {
+	public static boolean addCart(CartDTO.Create cart) {
 		EntityManager em = DBUtil.getEntityManager();
 		em.getTransaction().begin();
 		
 		boolean result = false;
-		Cart cart = null;
+		Cart newCart = null;
 		
 		try {
-			cart = new Cart();
-			cart.setUsers(em.find(Users.class, userId));
-			cart.setProduct(em.find(Product.class, productIdx));
+			newCart = new Cart();
+			newCart.setUsers(em.find(Users.class, cart.getUserIdx()));
+			newCart.setProduct(em.find(Product.class, cart.getProductIdx()));
 			
-			em.persist(cart);
+			em.persist(newCart);
 			em.getTransaction().commit();
 			
 			result = true;
