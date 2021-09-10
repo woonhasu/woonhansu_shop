@@ -1,8 +1,4 @@
 # woonhasu_shop
-# GIF 링크
-https://www.notion.so/WOONHASOO-6b83c72db4474f8d9404a7c3cc8d0d0e#88a5d73cb4cf4e28bc6d06bac72e98c2
-
----
 
 ## 🛍 운하수 쇼핑
 
