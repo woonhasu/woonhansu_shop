@@ -61,7 +61,7 @@ public class CartDAO {
 		
 		try {
 			newCart = new Cart();
-			newCart.setUsers(em.find(Users.class, cart.getUserIdx()));
+			newCart.setUsers(em.find(Users.class, cart.getUserId()));
 			newCart.setProduct(em.find(Product.class, cart.getProductIdx()));
 			
 			em.persist(newCart);

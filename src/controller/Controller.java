@@ -367,12 +367,12 @@ public class Controller extends HttpServlet {
 		String url = "showError.jsp";
 		
 		UsersDTO.Get user = (UsersDTO.Get) request.getSession().getAttribute("user");
-
+		
 		Long productIdx = Long.parseLong(request.getParameter("idx"));
-		CartDTO.Create cart = new CartDTO.Create(Long.parseLong(user.getId()), productIdx);
 		
 		try {
 			if (user != null) {
+				CartDTO.Create cart = new CartDTO.Create(user.getId(), productIdx);
 				boolean result = service.addCart(cart);
 				if(result) {
 					url = "controller?command=getUserCartAll";					
@@ -493,7 +493,7 @@ public class Controller extends HttpServlet {
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
-	//getOrdersList
+	//getOrdersAll
 	public void getOrdersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
@@ -527,7 +527,7 @@ public class Controller extends HttpServlet {
 		try {
 			boolean result = service.updateOrders(idx, productIdx);
 			if (result) {
-				url = "controller?command=getOrdersList";
+				url = "controller?command=getOrdersAll";
 			} else {
 				request.setAttribute("errorMsg", "수정 실패");
 			}
@@ -558,7 +558,7 @@ public class Controller extends HttpServlet {
 			}else if(admin == 1) {
 				boolean result = service.deleteOrders(idx);
 				if(result) {
-					url = "controller?command=getOrdersList";
+					url = "controller?command=getOrdersAll";
 				}else {
 					request.setAttribute("errorMsg", "주문 삭제 실패");
 				}

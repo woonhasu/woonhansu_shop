@@ -11,7 +11,7 @@ public class CartDTO {
 	@Data
 	@AllArgsConstructor
 	public static class Create {
-		private Long userIdx;
+		private String userId;
 		private Long productIdx;
 	}
 	
