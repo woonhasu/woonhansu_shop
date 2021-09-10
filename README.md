@@ -29,8 +29,10 @@
 ## ⚙ 개발 환경
 - `Java` : 1.8 version
 - `Eclipse` : photon
-- `JPA`
+- `OracleDB`
+- `Maven`
 - `Tomcat`
+- `JPA` / `Lombok`
 - `Servlet` / `JSP`
 - `HTML` / `CSS` / `JavaScript`
 
