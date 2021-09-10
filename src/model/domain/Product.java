@@ -12,12 +12,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,6 +35,9 @@ public class Product {
 	@NonNull
 	@Column(name="product_name")
 	private String name;
+	
+	@NonNull
+	private String category;
 	
 	@NonNull
 	private Integer price;
