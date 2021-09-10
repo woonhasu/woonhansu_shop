@@ -142,7 +142,7 @@ public class Controller extends HttpServlet {
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
-	//getUsersList
+	//getUsersAll
 	public void getUsersAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "showError.jsp";
 		
@@ -182,7 +182,7 @@ public class Controller extends HttpServlet {
 				String id = request.getParameter("id");
 				boolean result = service.updateUser(id, newUser);
 				if(result) {
-					url = "controller?command=getUsersList";
+					url = "controller?command=getUsersAll";
 				} else {
 					request.setAttribute("errorMsg", "수정 실패");
 				}
@@ -215,7 +215,7 @@ public class Controller extends HttpServlet {
 				String id = request.getParameter("id");
 				boolean result = service.deleteUser(id);
 				if(result) {
-					url = "controller?command=getUsersList";
+					url = "controller?command=getUsersAll";
 				} else {
 					request.setAttribute("errorMsg", "회원 삭제 실패");
 				}
@@ -243,7 +243,7 @@ public class Controller extends HttpServlet {
 		try {
 			boolean result = service.addProduct(user);
 			if(result) {
-				url = "controller?command=getProductList";
+				url = "controller?command=getProductAll";
 			} else {
 				request.setAttribute("errorMsg", "제품 추가 실패");
 			}
@@ -331,7 +331,7 @@ public class Controller extends HttpServlet {
 		try {
 			boolean result = service.updateProduct(idx, newProduct);
 			if(result) {
-				url = "controller?command=getProductList";
+				url = "controller?command=getProductAll";
 			} else {
 				request.setAttribute("errorMsg", "수정 실패");
 			}
@@ -351,7 +351,7 @@ public class Controller extends HttpServlet {
 		try {
 			boolean result = service.deleteProduct(idx);
 			if(result) {
-				url = "controller?command=getProductList";				
+				url = "controller?command=getProductAll";				
 			} else {
 				request.setAttribute("errorMsg", "제품 삭제 실패");
 			}
