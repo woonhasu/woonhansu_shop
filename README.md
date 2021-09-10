@@ -44,14 +44,6 @@
 
 ---
 
-## 📅 프로젝트 진행 타임라인
-
----
-
-# 1. Data Modeling
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9312ea46-ceef-4f3e-9ea0-0b3b9d0d826f/Untitled.png)
-
 # 2. SQL
 
 - DDL
