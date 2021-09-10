@@ -26,8 +26,10 @@
 			<h3>비밀번호 : ${sessionScope.user.pw}</h3>
 			<h3>주소 : ${sessionScope.user.address}</h3>
 			<h3>전화번호 : ${sessionScope.user.phone}</h3>
-			<div class="myPagebutton"><a href="updateUser.jsp">수정하기</a>
-			<a href="controller?command=deleteUser">탈퇴하기</a></div>
+			<div class="myPagebutton">
+				<a href="updateUser.jsp">수정하기</a>
+				<a href="controller?command=deleteUser">탈퇴하기</a>
+			</div>
 		</form>
 	</div>
 </body>
