@@ -1,5 +1,6 @@
 # woonhasu_shop
-![home.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4bddc490-e26c-447d-915c-842cb6e3fce9/home.gif)
+# GIF 링크
+https://www.notion.so/WOONHASOO-6b83c72db4474f8d9404a7c3cc8d0d0e#88a5d73cb4cf4e28bc6d06bac72e98c2
 
 ---
 
